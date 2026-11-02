@@ -1,0 +1,4311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高教中英文教科書・193張產品資訊圖智慧分類索引系統</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#061224',
+              900: '#0B1F3A',
+              800: '#132F54',
+              700: '#1D4477',
+            },
+            crimson: {
+              600: '#C8102E',
+              500: '#E11D48',
+              50: '#FFF1F2',
+            },
+            ivory: {
+              50: '#FAF8F5',
+              100: '#F3EFEA',
+              200: '#E6DFD5',
+            },
+            amberGold: {
+              600: '#B45309',
+              500: '#D97706',
+              100: '#FEF3C7',
+            }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --bg-paper: #FAF8F5;
+      --ink-primary: #0B1F3A;
+      --accent-crimson: #C8102E;
+      --border-warm: #E6DFD5;
+    }
+    body {
+      background-color: var(--bg-paper);
+      color: var(--ink-primary);
+      font-family: 'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
+      background-image: 
+        radial-gradient(at 100% 0%, rgba(200, 16, 46, 0.04) 0px, transparent 45%),
+        radial-gradient(at 0% 100%, rgba(11, 31, 58, 0.05) 0px, transparent 50%);
+    }
+    .serif-title {
+      font-family: 'Noto Serif TC', serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #F3EFEA;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+    .book-card {
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 32px -12px rgba(11, 31, 58, 0.16);
+    }
+    .drop-active {
+      outline: 3px dashed #C8102E !important;
+      outline-offset: -8px;
+      background-color: rgba(200, 16, 46, 0.04) !important;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-crimson-600 selection:text-white" id="appBody">
+
+  <!-- Top Editorial Header -->
+  <header class="bg-navy-900 text-white border-b-4 border-crimson-600 sticky top-0 z-30 shadow-lg">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-xl bg-crimson-600 flex items-center justify-center font-serif font-black text-xl tracking-wider shadow-inner shrink-0">
+          書目
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <h1 class="serif-title text-lg sm:text-xl font-bold tracking-wide text-white">高教中英文教科書・產品資訊圖分類索引系統</h1>
+            <span id="datasetModeBadge" class="text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+              已內建完整 193 張產品圖索引
+            </span>
+          </div>
+          <p class="text-xs text-slate-300 mt-0.5">
+            已依您的 <code class="font-mono text-amber-300">list.txt</code> 完整建檔 193 張圖（含 69 本英文原文、21 本中譯雙語標註、103 本中文教材）・9 大學科分類
+          </p>
+        </div>
+      </div>
+
+      <!-- Primary Action Toolbar -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <label for="folderInput" class="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-crimson-600 hover:bg-crimson-500 text-white text-xs sm:text-sm font-semibold shadow transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+          <span>📂 選擇資料夾 (載入 193 張圖)</span>
+        </label>
+        <input id="folderInput" type="file" webkitdirectory directory multiple class="hidden" onchange="handleFileSelect(event)" />
+
+        <label for="filesInput" class="cursor-pointer inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-navy-800 hover:bg-navy-700 text-slate-100 border border-slate-600/60 text-xs sm:text-sm font-medium transition">
+          <svg class="w-4 h-4 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>選取圖片檔</span>
+        </label>
+        <input id="filesInput" type="file" multiple accept="image/*" class="hidden" onchange="handleFileSelect(event)" />
+
+        <button type="button" onclick="openBatchListModal()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-navy-800 hover:bg-navy-700 text-slate-100 border border-slate-600/60 text-xs sm:text-sm font-medium transition">
+          <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          <span>貼上檔名清單</span>
+        </button>
+
+        <div class="relative" id="exportDropdownWrapper">
+          <button type="button" onclick="toggleExportMenu()" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white text-xs sm:text-sm font-semibold transition shadow">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>匯出索引 / 網頁</span>
+            <svg class="w-3.5 h-3.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="exportMenu" class="hidden absolute right-0 mt-2 w-72 rounded-xl bg-white shadow-2xl border border-slate-200 py-2 text-slate-800 z-50">
+            <div class="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100">
+              匯出與部署工具
+            </div>
+            <button type="button" onclick="exportStandaloneHtml()" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-start gap-2.5 transition">
+              <span class="text-base mt-0.5">🌐</span>
+              <div>
+                <div class="text-xs font-bold text-navy-900">下載固定書單獨立網頁 (index.html)</div>
+                <div class="text-[11px] text-slate-500">放入解壓縮後的圖片資料夾即可直接離線開啟全部圖片</div>
+              </div>
+            </button>
+            <button type="button" onclick="exportCsvCatalog()" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-start gap-2.5 transition">
+              <span class="text-base mt-0.5">📊</span>
+              <div>
+                <div class="text-xs font-bold text-navy-900">匯出 Excel / CSV 完整分類書單</div>
+                <div class="text-[11px] text-slate-500">含編號、學科領域、語系、作者、書名、版次、檔名</div>
+              </div>
+            </button>
+            <button type="button" onclick="exportJsonConfig()" class="w-full text-left px-4 py-2.5 hover:bg-slate-50 flex items-start gap-2.5 transition">
+              <span class="text-base mt-0.5">🗂️</span>
+              <div>
+                <div class="text-xs font-bold text-navy-900">備份 JSON 分類設定檔</div>
+                <div class="text-[11px] text-slate-500">保存您手動微調過的學科分類與自訂標籤</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quick Onboarding / Folder Drop Banner -->
+  <section id="dropZoneBanner" class="bg-gradient-to-r from-navy-900/5 via-ivory-100 to-crimson-600/5 border-b border-ivory-200">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3 text-xs sm:text-sm text-slate-700">
+        <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-navy-900 text-white font-bold text-xs shrink-0">💡</span>
+        <span>
+          <strong>已完整匯入 193 筆產品圖檔名！</strong>將本網頁下載放進圖片資料夾可直接讀取原圖；在雲端預覽時，亦可點擊上方 <strong>「📂 選擇資料夾 (載入 193 張圖)」</strong> 立即綁定本機圖片並預覽高畫質原圖。
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="openParserTestModal()" class="text-xs font-semibold text-navy-800 hover:text-crimson-600 underline underline-offset-4">
+          ⚙️ 檢視／調整檔名解析與分類規則
+        </button>
+        <span class="text-slate-300">|</span>
+        <button type="button" onclick="resetToDemoData()" class="text-xs text-slate-500 hover:text-slate-800">
+          載入預設範本
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Workspace Layout -->
+  <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-6 py-5 flex-1 flex flex-col lg:flex-row gap-6">
+
+    <!-- Left Sidebar: Subject Taxonomy & Filters -->
+    <aside class="w-full lg:w-72 shrink-0 flex flex-col gap-4">
+      <!-- KPI Summary Card -->
+      <div class="bg-white rounded-2xl p-4 border border-ivory-200 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">193 張產品圖庫統計</span>
+          <span id="activeFilterIndicator" class="hidden text-[11px] font-semibold text-crimson-600 bg-crimson-50 px-2 py-0.5 rounded-full">篩選中</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-ivory-50 rounded-xl p-2.5 border border-ivory-200">
+            <div id="statTotalCount" class="font-mono text-xl font-extrabold text-navy-900">193</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">總產品圖</div>
+          </div>
+          <div class="bg-ivory-50 rounded-xl p-2.5 border border-ivory-200">
+            <div id="statZhCount" class="font-mono text-xl font-extrabold text-emerald-700">124</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">中文／譯本</div>
+          </div>
+          <div class="bg-ivory-50 rounded-xl p-2.5 border border-ivory-200">
+            <div id="statEnCount" class="font-mono text-xl font-extrabold text-sky-700">69</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">英文原文</div>
+          </div>
+        </div>
+        <!-- Variant / Duplicate Filter Mode -->
+        <div class="mt-3 pt-3 border-t border-ivory-200">
+          <div class="text-[11px] font-bold text-slate-500 mb-1.5">重複副本與勘誤檔名檢視：</div>
+          <div class="grid grid-cols-3 gap-1" id="variantFilterGroup">
+            <button type="button" id="varBtnAll" onclick="setVariantMode('all')" class="px-2 py-1.5 rounded-lg text-[11px] font-semibold bg-navy-900 text-white">
+              全部 (193)
+            </button>
+            <button type="button" id="varBtnUnique" onclick="setVariantMode('unique')" class="px-2 py-1.5 rounded-lg text-[11px] font-semibold bg-ivory-50 text-slate-700 hover:bg-ivory-100 border border-ivory-200">
+              唯一 (175)
+            </button>
+            <button type="button" id="varBtnOnly" onclick="setVariantMode('variants')" class="px-2 py-1.5 rounded-lg text-[11px] font-semibold bg-ivory-50 text-amber-800 hover:bg-amber-50 border border-ivory-200">
+              重複/勘誤(18)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Language Filter -->
+      <div class="bg-white rounded-2xl p-4 border border-ivory-200 shadow-sm">
+        <div class="flex items-center justify-between mb-2.5">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">語系與教材類型</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5" id="langFilterContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Subject Categories -->
+      <div class="bg-white rounded-2xl p-4 border border-ivory-200 shadow-sm flex-1">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">9 大學科領域分類索引</h2>
+          <button type="button" onclick="resetAllFilters()" class="text-[11px] text-crimson-600 hover:underline font-medium">
+            重設全部
+          </button>
+        </div>
+        <div id="categoryListContainer" class="space-y-1">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Author Initial Quick Jump -->
+      <div class="bg-white rounded-2xl p-4 border border-ivory-200 shadow-sm">
+        <div class="flex items-center justify-between mb-2.5">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500">作者索引快速跳轉</h2>
+          <span id="selectedAuthorLetterLabel" class="text-[11px] font-mono text-crimson-600 font-semibold">全部</span>
+        </div>
+        <div id="authorIndexContainer" class="flex flex-wrap gap-1 max-h-48 overflow-y-auto custom-scrollbar pr-1">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Content Area -->
+    <main class="flex-1 flex flex-col min-w-0">
+      <!-- Search, Sort & View Mode Bar -->
+      <div class="bg-white rounded-2xl p-3.5 sm:p-4 border border-ivory-200 shadow-sm mb-4 flex flex-wrap items-center justify-between gap-3">
+        <!-- Search Input -->
+        <div class="relative flex-1 min-w-[240px]">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input
+            id="searchInput"
+            type="text"
+            placeholder="搜尋作者 (如 Ross, 林建煌, 朱敬一)、書名 (財務管理, 微積分, Marketing)、原文作者 (Robbins) 或版次..."
+            oninput="handleSearchInput(this.value)"
+            class="w-full pl-10 pr-9 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm text-navy-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-crimson-600 focus:bg-white transition"
+          />
+          <button
+            id="clearSearchBtn"
+            type="button"
+            onclick="clearSearch()"
+            class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+            title="清除搜尋"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Edition & Sort Controls -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <select
+            id="sortSelect"
+            onchange="handleSortChange(this.value)"
+            aria-label="排序方式"
+            class="px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-xs sm:text-sm font-medium text-navy-900 focus:outline-none focus:ring-2 focus:ring-navy-800"
+          >
+            <option value="category">依學科分類排序</option>
+            <option value="author">依作者姓名排序 (A→Z / 筆畫)</option>
+            <option value="title">依書名排序</option>
+            <option value="edition_desc">依版次排序 (高→低)</option>
+            <option value="filename">依原始檔名順序 (1→193)</option>
+          </select>
+
+          <!-- View Switcher -->
+          <div class="inline-flex rounded-xl bg-ivory-100 p-1 border border-ivory-200" role="group">
+            <button
+              type="button"
+              id="viewBtnGrid"
+              onclick="setViewMode('grid')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 bg-navy-900 text-white shadow-sm"
+            >
+              <span>🖼️ 圖卡</span>
+            </button>
+            <button
+              type="button"
+              id="viewBtnTable"
+              onclick="setViewMode('table')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 text-slate-600 hover:text-navy-900"
+            >
+              <span>📋 清單表</span>
+            </button>
+            <button
+              type="button"
+              id="viewBtnGrouped"
+              onclick="setViewMode('grouped')"
+              class="px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 text-slate-600 hover:text-navy-900"
+            >
+              <span>🗂️ 學科目錄</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Filter Breadcrumb Bar -->
+      <div id="filterBreadcrumbBar" class="flex items-center justify-between gap-2 mb-3 px-1">
+        <div class="flex items-center gap-2 flex-wrap text-xs text-slate-600" id="activeFilterChips">
+          <!-- Rendered by JS -->
+        </div>
+        <div class="text-xs font-mono text-slate-500 shrink-0" id="resultCountText">
+          顯示 193 / 193 筆
+        </div>
+      </div>
+
+      <!-- Main Catalog Container -->
+      <div id="catalogContainer" class="flex-1">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Lightbox Modal for Product Info Graphic Inspection & Quick Edit -->
+  <div id="lightboxModal" class="fixed inset-0 bg-navy-950/85 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 sm:p-5">
+    <div class="bg-white rounded-2xl max-w-6xl w-full max-h-[94vh] flex flex-col lg:flex-row overflow-hidden shadow-2xl border border-slate-700/40 animate-fade-in">
+      
+      <!-- Left: Zoomable Image Viewer -->
+      <div class="flex-1 bg-slate-900 relative flex flex-col min-h-[360px] lg:min-h-[620px] overflow-hidden">
+        <!-- Image Top Controls -->
+        <div class="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
+          <div class="pointer-events-auto inline-flex items-center gap-1.5 bg-navy-950/80 text-white text-xs px-3 py-1.5 rounded-full border border-white/15 backdrop-blur-md">
+            <span id="lightboxIndexBadge" class="font-mono font-semibold">1 / 193</span>
+            <span class="text-slate-400">｜</span>
+            <span id="lightboxFilenameLabel" class="font-mono text-amber-300 truncate max-w-[240px] sm:max-w-[380px]">filename.png</span>
+          </div>
+          <div class="pointer-events-auto inline-flex items-center gap-1 bg-navy-950/80 text-white px-2 py-1 rounded-full border border-white/15 backdrop-blur-md">
+            <button type="button" onclick="adjustZoom(-0.25)" class="px-2 py-0.5 hover:bg-white/10 rounded text-xs font-mono" title="縮小">－</button>
+            <span id="zoomLevelText" class="text-xs font-mono px-1.5">100%</span>
+            <button type="button" onclick="adjustZoom(0.25)" class="px-2 py-0.5 hover:bg-white/10 rounded text-xs font-mono" title="放大">＋</button>
+            <button type="button" onclick="resetZoom()" class="px-2 py-0.5 hover:bg-white/10 rounded text-[11px] text-sky-300" title="重設大小">重設</button>
+          </div>
+        </div>
+
+        <!-- Prev / Next Floating Buttons -->
+        <button type="button" onclick="navigateLightbox(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-navy-950/75 hover:bg-crimson-600 text-white flex items-center justify-center border border-white/15 transition shadow-lg" title="上一張 (←)">
+          ←
+        </button>
+        <button type="button" onclick="navigateLightbox(1)" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-navy-950/75 hover:bg-crimson-600 text-white flex items-center justify-center border border-white/15 transition shadow-lg" title="下一張 (→)">
+          →
+        </button>
+
+        <!-- Image Stage -->
+        <div id="lightboxStage" class="flex-1 overflow-auto flex items-center justify-center p-6 custom-scrollbar">
+          <div id="lightboxGraphicContainer" class="transition-transform duration-150 origin-center">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Metadata Details & Category Editor -->
+      <div class="w-full lg:w-96 bg-white p-5 flex flex-col justify-between overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-200">
+        <div>
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <span class="text-xs font-bold uppercase tracking-wider text-crimson-600">產品資訊圖書目卡</span>
+            <button type="button" onclick="closeLightbox()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm">
+              ✕
+            </button>
+          </div>
+
+          <!-- Parsed Metadata Editable Fields -->
+          <div class="mt-4 space-y-3.5">
+            <div>
+              <label for="editCategorySelect" class="block text-xs font-bold text-slate-600 mb-1">學科領域分類</label>
+              <select id="editCategorySelect" onchange="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm font-semibold text-navy-900 focus:outline-none focus:ring-2 focus:ring-crimson-600">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <div>
+              <label for="editLangSelect" class="block text-xs font-bold text-slate-600 mb-1">教材語系</label>
+              <select id="editLangSelect" onchange="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm font-medium text-navy-900 focus:outline-none focus:ring-2 focus:ring-crimson-600">
+                <option value="zh">中文教科書 (本土／中文著作)</option>
+                <option value="bilingual">中譯／雙語標註 (附原文作者書名)</option>
+                <option value="en">英文原文書 (English Original)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2.5">
+              <div class="col-span-2">
+                <label for="editAuthorInput" class="block text-xs font-bold text-slate-600 mb-1">作者 (Author)</label>
+                <input id="editAuthorInput" type="text" oninput="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm font-semibold text-navy-900" />
+              </div>
+              <div>
+                <label for="editEditionInput" class="block text-xs font-bold text-slate-600 mb-1">版次 (Edition)</label>
+                <input id="editEditionInput" type="text" oninput="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm font-mono font-semibold text-crimson-600" />
+              </div>
+            </div>
+
+            <div>
+              <label for="editTitleInput" class="block text-xs font-bold text-slate-600 mb-1">書名 (Book Title)</label>
+              <input id="editTitleInput" type="text" oninput="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-sm font-semibold text-navy-900" />
+            </div>
+
+            <div>
+              <label for="editTagsInput" class="block text-xs font-bold text-slate-600 mb-1">課程標籤／備註 (逗號分隔，如 GE國際版, 2026新版)</label>
+              <input id="editTagsInput" type="text" placeholder="例如：GE國際版, 2026 Release, 客製版" oninput="saveCurrentBookEdits()" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-xs text-navy-900" />
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs space-y-1">
+              <div class="text-slate-400 font-semibold">原始檔案名稱：</div>
+              <div id="lightboxRawFilename" class="font-mono text-slate-700 break-all select-all"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Actions -->
+        <div class="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-2">
+          <button type="button" onclick="copyBookCitation()" class="w-full py-2.5 px-4 rounded-xl bg-navy-900 hover:bg-navy-800 text-white text-xs font-semibold flex items-center justify-center gap-2 shadow transition">
+            <span>📋 複製書目資訊 (供業務簡報／信件貼上)</span>
+          </button>
+          <div class="text-[11px] text-slate-400 text-center">
+            提示：可使用鍵盤左右方向鍵 <kbd class="px-1.5 py-0.5 bg-slate-100 rounded border">←</kbd> <kbd class="px-1.5 py-0.5 bg-slate-100 rounded border">→</kbd> 快速切換產品圖
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal: Paste 193 Filenames List -->
+  <div id="batchListModal" class="fixed inset-0 bg-navy-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-ivory-200 animate-fade-in">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="serif-title text-lg font-bold text-navy-900">📋 批次貼上檔名清單（快速建立或更新索引）</h3>
+          <p class="text-xs text-slate-500 mt-0.5">一行一個檔名（含或不含 .png/.jpg 皆可），系統將自動拆解「作者、書名、版次」並分類</p>
+        </div>
+        <button type="button" onclick="closeBatchListModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold">✕</button>
+      </div>
+
+      <div class="mt-4 space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="imageFolderPrefixInput" class="block text-xs font-bold text-slate-700 mb-1">圖片相對路徑前綴 (與網頁同資料夾請留 `./`)</label>
+            <input id="imageFolderPrefixInput" type="text" value="./" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-xs font-mono text-navy-900" />
+          </div>
+          <div>
+            <label for="defaultExtInput" class="block text-xs font-bold text-slate-700 mb-1">若清單未含副檔名時預設補上</label>
+            <select id="defaultExtInput" class="w-full px-3 py-2 rounded-xl bg-ivory-50 border border-ivory-200 text-xs font-mono text-navy-900">
+              <option value=".png">.png</option>
+              <option value=".jpg">.jpg</option>
+              <option value=".jpeg">.jpeg</option>
+              <option value=".webp">.webp</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1">
+            <label for="batchFilenamesTextarea" class="text-xs font-bold text-slate-700">貼上檔名清單（每行一筆）：</label>
+            <button type="button" onclick="fillSampleFilenameList()" class="text-xs text-crimson-600 hover:underline font-medium">填入範例格式測試</button>
+          </div>
+          <textarea
+            id="batchFilenamesTextarea"
+            rows="9"
+            placeholder="Arens_Auditing and Assurance Services An Integrated Approach(GE) 18e.png&#10;Ross_Corporate Finance(2025 Release) 14e.png&#10;方世榮_現代人力資源管理（Dessler／Human Resource Management 16e） 16e.png"
+            class="w-full p-3 rounded-xl bg-ivory-50 border border-ivory-200 text-xs font-mono text-navy-900 focus:outline-none focus:ring-2 focus:ring-crimson-600"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="mt-5 flex items-center justify-end gap-2.5">
+        <button type="button" onclick="closeBatchListModal()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-700">取消</button>
+        <button type="button" onclick="importFromFilenameList()" class="px-5 py-2 rounded-xl bg-crimson-600 hover:bg-crimson-500 text-xs font-semibold text-white shadow">
+          ⚡ 立即解析並建立分類索引
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Filename Parser Rules & Testbench -->
+  <div id="parserTestModal" class="fixed inset-0 bg-navy-950/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full p-6 shadow-2xl border border-ivory-200 animate-fade-in max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div>
+          <h3 class="serif-title text-lg font-bold text-navy-900">⚙️ 智慧檔名解析規則與即時測試器</h3>
+          <p class="text-xs text-slate-500 mt-0.5">支援「作者_書名 版次」分隔、括號原文註記、eBook 前綴與重複編號識別</p>
+        </div>
+        <button type="button" onclick="closeParserTestModal()" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold">✕</button>
+      </div>
+
+      <div class="mt-4 space-y-4">
+        <div class="p-4 rounded-xl bg-ivory-50 border border-ivory-200">
+          <label for="liveParserInput" class="block text-xs font-bold text-navy-900 mb-1.5">輸入任一檔名測試自動拆解結果：</label>
+          <input
+            id="liveParserInput"
+            type="text"
+            value="方世榮_現代人力資源管理（Dessler／Human Resource Management 16e） 16e.png"
+            oninput="updateLiveParserPreview(this.value)"
+            class="w-full px-3.5 py-2 rounded-xl bg-white border border-slate-300 text-sm font-mono text-navy-900 focus:outline-none focus:ring-2 focus:ring-crimson-600"
+          />
+          <div id="liveParserResult" class="mt-3 grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="font-bold text-navy-900 mb-1.5">✅ 已針對您的 193 筆檔名特徵全面優化</div>
+            <ul class="space-y-1 text-slate-600 font-mono text-[11px]">
+              <li>• Arens_Auditing...(GE) 18e.png → 會計審計 / GE國際版</li>
+              <li>• Cannon_eBookEssentials...(2026 Release) 19e.png → eBook數位教材</li>
+              <li>• Libby_Financial Accounting 12e for 企管系.png → 客製版教材</li>
+              <li>• 黃家齊_組織行為學(Robbins... 19e) 19e.png → 中譯經典教材</li>
+              <li>• 林建煌_管理學概論 7e(書名有誤).png → 自動標記勘誤與副本</li>
+            </ul>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="font-bold text-navy-900 mb-1.5">🎯 9 大學科關鍵字自動歸類引擎</div>
+            <p class="text-slate-600 leading-relaxed">
+              系統已將您的 193 張產品圖精準歸入 9 大學科領域（行銷與國企 31、財務金融與保險 30、企業管理與策略 27、統計與微積分工數 24、會計審計與稅法 22、經濟與財政計量 20、資訊工程與研究方法 15、組織行為與人資 13、作業生管與物流專案 11）。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 flex justify-end">
+        <button type="button" onclick="closeParserTestModal()" class="px-5 py-2 rounded-xl bg-navy-900 text-white text-xs font-semibold">完成檢視</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script>
+    // ============================================================================
+    // 1. 9-CATEGORY ACADEMIC TAXONOMY
+    // ============================================================================
+    const CATEGORIES = [
+      {
+        id: 'marketing',
+        name: '行銷、國企與國貿',
+        icon: '📣',
+        badgeClass: 'bg-rose-100 text-rose-900 border-rose-300',
+        accentColor: '#E11D48',
+        keywords: ['advertising', 'marketing', 'emarketing', 'services marketing', 'global business today', '行銷', '消費者行為', '零售管理', '廣告', '品牌管理', '國際貿易實務', '國際企業']
+      },
+      {
+        id: 'finance',
+        name: '財務金融、投資與保險',
+        icon: '📊',
+        badgeClass: 'bg-amber-100 text-amber-900 border-amber-300',
+        accentColor: '#D97706',
+        keywords: ['investments', 'corporate finance', 'financial management', 'derivative', 'money banking', 'fintech', 'international financial', 'risk management and insurance', '財務管理', '投資學', '企業財務策略', '保險學', '財產保險', '壽險數理', '財務數學', '貨幣銀行', '國際金融', '現代金融市場', '期貨與選擇權']
+      },
+      {
+        id: 'management',
+        name: '企業管理、策略與創新',
+        icon: '🏢',
+        badgeClass: 'bg-sky-100 text-sky-900 border-sky-300',
+        accentColor: '#0284C7',
+        keywords: ['entrepreneurship', 'business essentials', 'contemporary management', 'strategic management', '管理學', '企業概論', '企業管理', '策略管理', '科技創新管理', '科技與創新管理', '中小企業管理', '服務管理', '企業倫理']
+      },
+      {
+        id: 'quant',
+        name: '統計、微積分與工數',
+        icon: '📈',
+        badgeClass: 'bg-indigo-100 text-indigo-900 border-indigo-300',
+        accentColor: '#4F46E5',
+        keywords: ['statistics', 'statistical', 'probability', 'abstract algebra', 'calculus', 'engineering mathematics', '統計', '微積分', '工程數學', 'hoffmann']
+      },
+      {
+        id: 'accounting',
+        name: '會計、審計與租稅財報',
+        icon: '🧮',
+        badgeClass: 'bg-emerald-100 text-emerald-900 border-emerald-300',
+        accentColor: '#059669',
+        keywords: ['auditing', 'assurance', 'cost accounting', 'managerial accounting', 'financial accounting', 'accounting information', 'sustainability reporting', '會計', '審計', '租稅法', '財務報表分析', '財務分析與企業評價']
+      },
+      {
+        id: 'economics',
+        name: '經濟學、財政與計量',
+        icon: '⚖️',
+        badgeClass: 'bg-purple-100 text-purple-900 border-purple-300',
+        accentColor: '#7C3AED',
+        keywords: ['macroeconomics', 'principles of economics', 'international economics', 'microeconomics', 'econometrics', '經濟學', '基礎經濟學', '通識經濟學', '計量經濟學', '財政學', '循環經濟', '個體經濟學', '法律經濟學', '數理經濟學', '工程經濟學']
+      },
+      {
+        id: 'cs_eng',
+        name: '資訊工程、研究方法與EMI',
+        icon: '💻',
+        badgeClass: 'bg-cyan-100 text-cyan-900 border-cyan-300',
+        accentColor: '#0891B2',
+        keywords: ['ai in business', 'control engineering', 'database management', 'data mining', 'systems analysis', '人因工程', '計算機概論', '資訊管理', '系統分析', 'research methods', '企業研究方法', 'emi']
+      },
+      {
+        id: 'ob_hrm',
+        name: '組織行為與人力資源',
+        icon: '👥',
+        badgeClass: 'bg-teal-100 text-teal-900 border-teal-300',
+        accentColor: '#0D9488',
+        keywords: ['human resource', '組織', '人力資源', '跨文化管理', 'leadership']
+      },
+      {
+        id: 'hospitality_elt',
+        name: '作業生管、物流與專案',
+        icon: '📦',
+        badgeClass: 'bg-orange-100 text-orange-900 border-orange-300',
+        accentColor: '#EA580C',
+        keywords: ['operations', 'supply chain', 'project management', '作業與供應鏈', '作業管理', '生產管理', '現代物流', '現代運輸', '專案管理']
+      }
+    ];
+
+    const LANG_LABELS = {
+      all: { label: '全部語系', badge: 'bg-slate-100 text-slate-700' },
+      zh: { label: '中文教科書', badge: 'bg-emerald-50 text-emerald-800 border border-emerald-200' },
+      bilingual: { label: '中譯／雙語標註', badge: 'bg-amber-50 text-amber-800 border border-amber-200' },
+      en: { label: '英文原文書', badge: 'bg-sky-50 text-sky-800 border border-sky-200' }
+    };
+
+    // ============================================================================
+    // 2. COMPLETE 193-ITEM PRE-CLASSIFIED CATALOG FROM USER'S list.txt
+    // ============================================================================
+    const INITIAL_CATALOG_193 = [
+  {
+    "file": "Arens_Auditing and Assurance Services An Integrated Approach(GE) 18e.png",
+    "author": "Arens",
+    "title": "Auditing and Assurance Services An Integrated Approach(GE)",
+    "origInfo": "",
+    "edition": "18e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Arens_Contemporary Advertising and Integrated Marketing Communications 17e.png",
+    "author": "Arens",
+    "title": "Contemporary Advertising and Integrated Marketing Communications",
+    "origInfo": "",
+    "edition": "17e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Armstrong_Marketing An Introduction(GE) 15e.png",
+    "author": "Armstrong",
+    "title": "Marketing An Introduction(GE)",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Bamford_Entrepreneurship 4e.png",
+    "author": "Bamford",
+    "title": "Entrepreneurship",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "en",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Belch_Advertising and Promotion 13e.png",
+    "author": "Belch",
+    "title": "Advertising and Promotion",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Berenson_Basic Business Statistics： Concepts and Applications(GE) 14e.png",
+    "author": "Berenson",
+    "title": "Basic Business Statistics： Concepts and Applications(GE)",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Bodie_Essentials of Investments(2024 Release) 13e (2).png",
+    "author": "Bodie",
+    "title": "Essentials of Investments(2024 Release)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "重複副本圖檔",
+      "2024 Release"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Bodie_Essentials of Investments(2024 Release) 13e.png",
+    "author": "Bodie",
+    "title": "Essentials of Investments(2024 Release)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Brealey_Fundamentals of Corporate Finance(2026 Release) 12e.png",
+    "author": "Brealey",
+    "title": "Fundamentals of Corporate Finance(2026 Release)",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Brigmah_Essentials of Financial Management 8e.png",
+    "author": "Brigmah",
+    "title": "Essentials of Financial Management",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Brown_eBook_Introduction to Derivative Markets(2026 Release).png",
+    "author": "Brown",
+    "title": "Introduction to Derivative Markets(2026 Release)",
+    "origInfo": "",
+    "edition": "2026版",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "eBook數位教材",
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Cannon_eBookEssentials of Marketing A Marketing Strategy Planning Approach(2026 Release) 19e.png",
+    "author": "Cannon",
+    "title": "Essentials of Marketing A Marketing Strategy Planning Approach(2026 Release)",
+    "origInfo": "",
+    "edition": "19e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "eBook數位教材",
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Cecchetti_Money Banking and Financial Markets (2024 Release) 7e.png",
+    "author": "Cecchetti",
+    "title": "Money Banking and Financial Markets (2024 Release)",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Datar_Horngren's Cost Accounting A Managerial Emphasis (Global Edition) 17e.png",
+    "author": "Datar",
+    "title": "Horngren's Cost Accounting A Managerial Emphasis (Global Edition)",
+    "origInfo": "",
+    "edition": "17e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Devore_Probability and Statistics for Engineering and the Science 9e.png",
+    "author": "Devore",
+    "title": "Probability and Statistics for Engineering and the Science",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Dornbusch_Macroeconomics 13e.png",
+    "author": "Dornbusch",
+    "title": "Macroeconomics",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Ebert_Business Essentials(GE) 13e.png",
+    "author": "Ebert",
+    "title": "Business Essentials(GE)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "management",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Ebert_Business Essentials(GE)13e.png",
+    "author": "Ebert",
+    "title": "Business Essentials(GE)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "management",
+    "tags": [
+      "檔名格式重複",
+      "GE國際版"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "EMI師資增能.png",
+    "author": "專案教材",
+    "title": "EMI 全英語授課師資增能專題",
+    "origInfo": "English as a Medium of Instruction",
+    "edition": "專題圖",
+    "lang": "zh",
+    "category": "cs_eng",
+    "tags": [
+      "EMI全英授課",
+      "專題圖卡"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Fraleigh_A First Course in Abstract Algebra (PNIE) 7e.png",
+    "author": "Fraleigh",
+    "title": "A First Course in Abstract Algebra (PNIE)",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Frank_Principles of Economics(2024 Release) 9e (2).png",
+    "author": "Frank",
+    "title": "Principles of Economics(2024 Release)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [
+      "重複副本圖檔",
+      "2024 Release"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Frank_Principles of Economics(2024 Release) 9e.png",
+    "author": "Frank",
+    "title": "Principles of Economics(2024 Release)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Frost_eMarketing Digital Marketing Strategy (ISE) 9e.png",
+    "author": "Frost",
+    "title": "eMarketing Digital Marketing Strategy (ISE)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "George_Contemporary Management(2024 Release) 13e.png",
+    "author": "George",
+    "title": "Contemporary Management(2024 Release)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "management",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Goldstein_Calculus & Its Applications (GE) 14e.png",
+    "author": "Goldstein",
+    "title": "Calculus & Its Applications (GE)",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hair_Essentials of Business Research Methods 5e.png",
+    "author": "Hair",
+    "title": "Essentials of Business Research Methods",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Hair_Essentials of Marketing Research 6e.png",
+    "author": "Hair",
+    "title": "Essentials of Marketing Research",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Heizer_Principles of Operations Management Sustainability and Supply Chain Management (GE) 11e.png",
+    "author": "Heizer",
+    "title": "Principles of Operations Management Sustainability and Supply Chain Management (GE)",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "en",
+    "category": "hospitality_elt",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hill_Global Business Today(2024 Release) 13e.png",
+    "author": "Hill",
+    "title": "Global Business Today(2024 Release)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hill_Strategic Management An Integrated Approach Theory (Asia Edition)13e.png",
+    "author": "Hill",
+    "title": "Strategic Management An Integrated Approach Theory (Asia Edition)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "management",
+    "tags": [
+      "亞洲版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hilton_Managerial Accounting Creating Value in a Dynamic Business Environment(2026 Release) 14e (2).png",
+    "author": "Hilton",
+    "title": "Managerial Accounting Creating Value in a Dynamic Business Environment(2026 Release)",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "重複副本圖檔",
+      "2026 Release"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Hilton_Managerial Accounting Creating Value in a Dynamic Business Environment(2026 Release) 14e.png",
+    "author": "Hilton",
+    "title": "Managerial Accounting Creating Value in a Dynamic Business Environment(2026 Release)",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hoffmann VS Larson.png",
+    "author": "Hoffmann / Larson",
+    "title": "Hoffmann VS Larson 微積分教材比較圖",
+    "origInfo": "Applied Calculus Comparison",
+    "edition": "比較圖",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "教材比較圖卡",
+      "微積分"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Hogg_Introduction to Mathematical Statistics (GE) 8e.png",
+    "author": "Hogg",
+    "title": "Introduction to Mathematical Statistics (GE)",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Johanns_AI in Business Creating Value Responsibly1e.png",
+    "author": "Johanns",
+    "title": "AI in Business Creating Value Responsibly",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "John_eBook_Survey of Fintech(2026 Release).png",
+    "author": "John",
+    "title": "Survey of Fintech(2026 Release)",
+    "origInfo": "",
+    "edition": "2026版",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "eBook數位教材",
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Jones_Contemporary Management(2024 Release) 13e.png",
+    "author": "Jones",
+    "title": "Contemporary Management(2024 Release)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "management",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Jordan_Fundamentals of Investments Valuation and Management 10e.png",
+    "author": "Jordan",
+    "title": "Fundamentals of Investments Valuation and Management",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Kotler_Marketing Management(GE) 16e (2).png",
+    "author": "Kotler",
+    "title": "Marketing Management(GE)",
+    "origInfo": "",
+    "edition": "16e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "重複副本圖檔",
+      "GE國際版"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Kotler_Marketing Management(GE) 16e.png",
+    "author": "Kotler",
+    "title": "Marketing Management(GE)",
+    "origInfo": "",
+    "edition": "16e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Krugman_International Economics Theory and Policy(GE) 12e.png",
+    "author": "Krugman",
+    "title": "International Economics Theory and Policy(GE)",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Larson_Calculus An Applied Approach (Metric Version)(Custom Solutions) 1e.png",
+    "author": "Larson",
+    "title": "Calculus An Applied Approach (Metric Version)(Custom Solutions)",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "客製版教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Larson_Project Management A Socio-Technical Approach(2024 Release) 9e.png",
+    "author": "Larson",
+    "title": "Project Management A Socio-Technical Approach(2024 Release)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "hospitality_elt",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Libby_Financial Accounting 12e for 企管系.png",
+    "author": "Libby",
+    "title": "Financial Accounting (for 企管系)",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "bilingual",
+    "category": "accounting",
+    "tags": [
+      "客製版教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Libby_Financial Accounting 12e.png",
+    "author": "Libby",
+    "title": "Financial Accounting",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Lind_Statistical Techniques in Business and Economics(Custom Edition) 19e (2).png",
+    "author": "Lind",
+    "title": "Statistical Techniques in Business and Economics(Custom Edition)",
+    "origInfo": "",
+    "edition": "19e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "重複副本圖檔",
+      "客製版教材"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Lind_Statistical Techniques in Business and Economics(Custom Edition) 19e.png",
+    "author": "Lind",
+    "title": "Statistical Techniques in Business and Economics(Custom Edition)",
+    "origInfo": "",
+    "edition": "19e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "客製版教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Madura_International Financial Management (Asia Edition) 15e.png",
+    "author": "Madura",
+    "title": "International Financial Management (Asia Edition)",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "亞洲版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Mishkin_The Economics of Money, Banking and Financial Markets (GE) 13e.png",
+    "author": "Mishkin",
+    "title": "The Economics of Money, Banking and Financial Markets (GE)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Noe_Fundamentals of Human Resource Management(2024 Release) 10e.png",
+    "author": "Noe",
+    "title": "Fundamentals of Human Resource Management(2024 Release)",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "en",
+    "category": "ob_hrm",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Noe_Human Resource Management Gaining a Competitive Advantage 13e.png",
+    "author": "Noe",
+    "title": "Human Resource Management Gaining a Competitive Advantage",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Ogata_Modern Control Engineering 5e.png",
+    "author": "Ogata",
+    "title": "Modern Control Engineering",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Oneil_Advanced Engineering Mathematics si.png",
+    "author": "Oneil",
+    "title": "Advanced Engineering Mathematics",
+    "origInfo": "",
+    "edition": "SI版",
+    "lang": "en",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Perloff_Microeconomics(GE) 9e.png",
+    "author": "Perloff",
+    "title": "Microeconomics(GE)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Pindyck_Microeconomics (GE) 9e.png",
+    "author": "Pindyck",
+    "title": "Microeconomics (GE)",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Porco_eBook_Sustainability Reporting and Disclosures(2026 Release).png",
+    "author": "Porco",
+    "title": "Sustainability Reporting and Disclosures(2026 Release)",
+    "origInfo": "",
+    "edition": "2026版",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "eBook數位教材",
+      "2026 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Pratt_Concepts of Database Management (Original) 10e.png",
+    "author": "Pratt",
+    "title": "Concepts of Database Management (Original)",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Rejda_Principles of Risk Management and Insurance 14e.png",
+    "author": "Rejda",
+    "title": "Principles of Risk Management and Insurance",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Romney_Accounting Information Systems (GE) 16e.png",
+    "author": "Romney",
+    "title": "Accounting Information Systems (GE)",
+    "origInfo": "",
+    "edition": "16e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Ross_A First Course in Probability (GE) 10e.png",
+    "author": "Ross",
+    "title": "A First Course in Probability (GE)",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "en",
+    "category": "quant",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Ross_Corporate Finance(2025 Release) 14e.png",
+    "author": "Ross",
+    "title": "Corporate Finance(2025 Release)",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "finance",
+    "tags": [
+      "2025 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Rothaermel_Strategic Management Concepts 6e.png",
+    "author": "Rothaermel",
+    "title": "Strategic Management Concepts",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "en",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Schindler_Business Research Methods 14e (2).png",
+    "author": "Schindler",
+    "title": "Business Research Methods",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [
+      "重複副本圖檔"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Schindler_Business Research Methods 14e.png",
+    "author": "Schindler",
+    "title": "Business Research Methods",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Stevenson_Operations and Supply Chain Management(2024 Release) 15e.png",
+    "author": "Stevenson",
+    "title": "Operations and Supply Chain Management(2024 Release)",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "en",
+    "category": "hospitality_elt",
+    "tags": [
+      "2024 Release"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Tan_Introduction to Data Mining (GE) 2e.png",
+    "author": "Tan",
+    "title": "Introduction to Data Mining (GE)",
+    "origInfo": "",
+    "edition": "2e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [
+      "GE國際版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Tilley_Systems Analysis and Design (Cengage International Edition) 13e.png",
+    "author": "Tilley",
+    "title": "Systems Analysis and Design (Cengage International Edition)",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "en",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Wild_Principles of Financial Accounting IFRS (Chapter 1-17)(Custom Edition) 3e (2).png",
+    "author": "Wild",
+    "title": "Principles of Financial Accounting IFRS (Chapter 1-17)(Custom Edition)",
+    "origInfo": "",
+    "edition": "3e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "重複副本圖檔",
+      "客製版教材"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "Wild_Principles of Financial Accounting IFRS (Chapter 1-17)(Custom Edition) 3e.png",
+    "author": "Wild",
+    "title": "Principles of Financial Accounting IFRS (Chapter 1-17)(Custom Edition)",
+    "origInfo": "",
+    "edition": "3e",
+    "lang": "en",
+    "category": "accounting",
+    "tags": [
+      "客製版教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "Wooldridge_ Introductory Econometrics 8e.png",
+    "author": "Wooldridge",
+    "title": "Introductory Econometrics",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "en",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "Zeithaml_Services Marketing Integrating Customer Focus Across the Firm 8e.png",
+    "author": "Zeithaml",
+    "title": "Services Marketing Integrating Customer Focus Across the Firm",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "en",
+    "category": "marketing",
+    "tags": [
+      "客製版教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "于卓民_國際企業管理.png",
+    "author": "于卓民",
+    "title": "國際企業管理",
+    "origInfo": "",
+    "edition": "通用版",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "方世榮_基礎統計學7e.png",
+    "author": "方世榮",
+    "title": "基礎統計學",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "方世榮_現代人力資源管理（Dessler／Human Resource Management 16e） 16e.png",
+    "author": "方世榮",
+    "title": "現代人力資源管理（Dessler／Human Resource Management 16e）",
+    "origInfo": "Dessler／Human Resource Management 16e",
+    "edition": "16e",
+    "lang": "bilingual",
+    "category": "ob_hrm",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "方世榮_統計學導論 9e.png",
+    "author": "方世榮",
+    "title": "統計學導論",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "王明昌_財務管理 14e.png",
+    "author": "王明昌",
+    "title": "財務管理",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "王精文_人力資源管理：全球經驗本土實踐 9e.png",
+    "author": "王精文",
+    "title": "人力資源管理：全球經驗本土實踐",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "史青林_微積分 10e (2).png",
+    "author": "史青林",
+    "title": "微積分",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "重複副本圖檔"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "史青林_微積分 10e (3).png",
+    "author": "史青林",
+    "title": "微積分",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "重複副本圖檔"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "史青林_微積分 10e.png",
+    "author": "史青林",
+    "title": "微積分",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱文儀_策略管理 14e.png",
+    "author": "朱文儀",
+    "title": "策略管理",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱敬一_基礎經濟學 10e.png",
+    "author": "朱敬一",
+    "title": "基礎經濟學",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱敬一_通識經濟學 3e.png",
+    "author": "朱敬一",
+    "title": "通識經濟學",
+    "origInfo": "",
+    "edition": "3e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱敬一_經濟學 11e.png",
+    "author": "朱敬一",
+    "title": "經濟學",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱敬一_經濟學.png",
+    "author": "朱敬一",
+    "title": "經濟學",
+    "origInfo": "",
+    "edition": "通用版",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "朱敬一_經濟學概要 8e.png",
+    "author": "朱敬一",
+    "title": "經濟學概要",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "余坤東_管理學 14e.png",
+    "author": "余坤東",
+    "title": "管理學",
+    "origInfo": "",
+    "edition": "14e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳坤山_作業與供應鏈管理 15e.png",
+    "author": "吳坤山",
+    "title": "作業與供應鏈管理",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳坤山_作業與供應鏈管理 精簡版15e.png",
+    "author": "吳坤山",
+    "title": "作業與供應鏈管理 精簡版",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [
+      "精華/精簡版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "吳萬益_企業研究方法 6e.png",
+    "author": "吳萬益",
+    "title": "企業研究方法",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳嘉勳_租稅法 44e.png",
+    "author": "吳嘉勳",
+    "title": "租稅法",
+    "origInfo": "",
+    "edition": "44e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳嘉勳_會計學 13e.png",
+    "author": "吳嘉勳",
+    "title": "會計學",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳嘉勳_會計學概要7e.png",
+    "author": "吳嘉勳",
+    "title": "會計學概要",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳嘉勳_實用會計學概要 1e.png",
+    "author": "吳嘉勳",
+    "title": "實用會計學概要",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳學良_現代管理學 11e.png",
+    "author": "吳學良",
+    "title": "現代管理學",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "吳錦錩_管理學10e.png",
+    "author": "吳錦錩",
+    "title": "管理學",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "宋秋儀_組織領導學(YuklLeadership in Organizations 8e) 8e.png",
+    "author": "宋秋儀",
+    "title": "組織領導學(YuklLeadership in Organizations 8e)",
+    "origInfo": "Yukl / Leadership in Organizations 8e",
+    "edition": "8e",
+    "lang": "bilingual",
+    "category": "ob_hrm",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "李元恕_行銷學 15e.png",
+    "author": "李元恕",
+    "title": "行銷學",
+    "origInfo": "",
+    "edition": "15e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李元恕_行銷學(Armstrong Marketing An Introduction 15e) 15e.png",
+    "author": "李元恕",
+    "title": "行銷學(Armstrong Marketing An Introduction 15e)",
+    "origInfo": "Armstrong Marketing An Introduction 15e",
+    "edition": "15e",
+    "lang": "bilingual",
+    "category": "marketing",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "李元恕_行銷學.png",
+    "author": "李元恕",
+    "title": "行銷學",
+    "origInfo": "",
+    "edition": "通用版",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李再長_人因工程 2e.png",
+    "author": "李再長",
+    "title": "人因工程",
+    "origInfo": "",
+    "edition": "2e",
+    "lang": "zh",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李克聰_工程經濟學 4e.png",
+    "author": "李克聰",
+    "title": "工程經濟學",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李宗黎_稅務會計-理論與應用 7e.png",
+    "author": "李宗黎",
+    "title": "稅務會計-理論與應用",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李宗黎_審計新論 12e.png",
+    "author": "李宗黎",
+    "title": "審計新論",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李亭林_科技創新管理 7e.png",
+    "author": "李亭林",
+    "title": "科技創新管理",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李亭林_科技創新管理(SchillingStrategic Management of Technological Innovation 7e) 7e.png",
+    "author": "李亭林",
+    "title": "科技創新管理(SchillingStrategic Management of Technological Innovation 7e)",
+    "origInfo": "Schilling / Strategic Management of Technological Innovation 7e",
+    "edition": "7e",
+    "lang": "bilingual",
+    "category": "management",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "李品陞_成本與管理會計 18e.png",
+    "author": "李品陞",
+    "title": "成本與管理會計",
+    "origInfo": "",
+    "edition": "18e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "李國瑋_中小企業管理：創業的觀點(LongeneckerSmall Business Management Launching & Growing Entrepreneurial Ventures 20e) 20e.png",
+    "author": "李國瑋",
+    "title": "中小企業管理：創業的觀點(LongeneckerSmall Business Management Launching & Growing Entrepreneurial Ventures 20e)",
+    "origInfo": "Longenecker / Small Business Management Launching & Growing Entrepreneurial Ventures 20e",
+    "edition": "20e",
+    "lang": "bilingual",
+    "category": "management",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "周淑卿_財務報表分析 1e.png",
+    "author": "周淑卿",
+    "title": "財務報表分析",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林光賢_商用微積分 5e (2).png",
+    "author": "林光賢",
+    "title": "商用微積分",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "重複副本圖檔"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林光賢_商用微積分 5e.png",
+    "author": "林光賢",
+    "title": "商用微積分",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林呈昱_行銷研究 2e.png",
+    "author": "林呈昱",
+    "title": "行銷研究",
+    "origInfo": "",
+    "edition": "2e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_企業概論_7e.png",
+    "author": "林建煌",
+    "title": "企業概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [
+      "檔名格式重複"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林建煌_企業概論7e.png",
+    "author": "林建煌",
+    "title": "企業概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_行銷學7e.png",
+    "author": "林建煌",
+    "title": "行銷學",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_服務行銷：擬定服務業最佳行銷策略5e.png",
+    "author": "林建煌",
+    "title": "服務行銷：擬定服務業最佳行銷策略",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_消費者行為 8e.png",
+    "author": "林建煌",
+    "title": "消費者行為",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_消費者行為概論 7e.png",
+    "author": "林建煌",
+    "title": "消費者行為概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_國際行銷 7e.png",
+    "author": "林建煌",
+    "title": "國際行銷",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_國際行銷管理 7e.png",
+    "author": "林建煌",
+    "title": "國際行銷管理",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_管理學 8e.png",
+    "author": "林建煌",
+    "title": "管理學",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_管理學概論 7e (2).png",
+    "author": "林建煌",
+    "title": "管理學概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [
+      "重複副本圖檔"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林建煌_管理學概論 7e(書名有誤).png",
+    "author": "林建煌",
+    "title": "管理學概論 [書名有誤]",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [
+      "檔名標註有誤"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林建煌_管理學概論 7e.png",
+    "author": "林建煌",
+    "title": "管理學概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林建煌_管理學概論7e.png",
+    "author": "林建煌",
+    "title": "管理學概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [
+      "檔名格式重複"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林哲鵬_投資學：基礎與應用10e.png",
+    "author": "林哲鵬",
+    "title": "投資學：基礎與應用",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林哲鵬_投資學：理論與實務12e.png",
+    "author": "林哲鵬",
+    "title": "投資學：理論與實務",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林蕙真_中級會計學新論(上冊) 11e.png",
+    "author": "林蕙真",
+    "title": "中級會計學新論(上冊)",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林蕙真_會計學理論與應用 13e.png",
+    "author": "林蕙真",
+    "title": "會計學理論與應用",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林蕙真_管理會計學-理論與應用(全一冊) 8e.png",
+    "author": "林蕙真",
+    "title": "管理會計學-理論與應用(全一冊)",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "accounting",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "林霖_企業財務策略(BenderCorporate Financial Strategy 4e) (2).png",
+    "author": "林霖",
+    "title": "企業財務策略(BenderCorporate Financial Strategy 4e)",
+    "origInfo": "Bender / Corporate Financial Strategy 4e",
+    "edition": "4e",
+    "lang": "bilingual",
+    "category": "finance",
+    "tags": [
+      "重複副本圖檔",
+      "中譯經典教材"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "林霖_企業財務策略(BenderCorporate Financial Strategy 4e).png",
+    "author": "林霖",
+    "title": "企業財務策略(BenderCorporate Financial Strategy 4e)",
+    "origInfo": "Bender / Corporate Financial Strategy 4e",
+    "edition": "4e",
+    "lang": "bilingual",
+    "category": "finance",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "胥愛琦_計量經濟學 8e.png",
+    "author": "胥愛琦",
+    "title": "計量經濟學",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "凌氤寶_保險學：理論與實務 11e.png",
+    "author": "凌氤寶",
+    "title": "保險學：理論與實務",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "凌氤寶_財產保險經營 1e.png",
+    "author": "凌氤寶",
+    "title": "財產保險經營",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "徐偉初_財政學 5e.png",
+    "author": "徐偉初",
+    "title": "財政學",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "徐淑如_作業管理 17e.png",
+    "author": "徐淑如",
+    "title": "作業管理",
+    "origInfo": "",
+    "edition": "17e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "徐璧君_壽險數理實務_4e.png",
+    "author": "徐璧君",
+    "title": "壽險數理實務",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "張有恆_現代物流管理 5e.png",
+    "author": "張有恆",
+    "title": "現代物流管理",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "張有恆_現代物流管理：物流與供應鏈整合 6e.png",
+    "author": "張有恆",
+    "title": "現代物流管理：物流與供應鏈整合",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "張有恆_現代運輸學 6e.png",
+    "author": "張有恆",
+    "title": "現代運輸學",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "張保隆_生產管理 4e.png",
+    "author": "張保隆",
+    "title": "生產管理",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "梁馨予_循環經濟與企業永續 1e.png",
+    "author": "梁馨予",
+    "title": "循環經濟與企業永續",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "許英傑_零售管理 9e.png",
+    "author": "許英傑",
+    "title": "零售管理",
+    "origInfo": "",
+    "edition": "9e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "許嘉文_國際企業(HillInternational Business Competing in the Global Marketplace 14e) 14e.png",
+    "author": "許嘉文",
+    "title": "國際企業(HillInternational Business Competing in the Global Marketplace 14e)",
+    "origInfo": "Hill / International Business Competing in the Global Marketplace 14e",
+    "edition": "14e",
+    "lang": "bilingual",
+    "category": "marketing",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "郭敏華_財務分析與企業評價(PalepuBusiness Analysis and Valuation IFRS Edition) 5e.png",
+    "author": "郭敏華",
+    "title": "財務分析與企業評價(PalepuBusiness Analysis and Valuation IFRS Edition)",
+    "origInfo": "Palepu / Business Analysis and Valuation IFRS Edition",
+    "edition": "5e",
+    "lang": "bilingual",
+    "category": "accounting",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "陳乃維_商用統計學 19e.png",
+    "author": "陳乃維",
+    "title": "商用統計學",
+    "origInfo": "",
+    "edition": "19e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳以亨_組織發展與變革 12e.png",
+    "author": "陳以亨",
+    "title": "組織發展與變革",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳正忠_網路行銷概論 8e.png",
+    "author": "陳正忠",
+    "title": "網路行銷概論",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳正忠_網路行銷概論(FrostE Marketing 8e) 8e.png",
+    "author": "陳正忠",
+    "title": "網路行銷概論(FrostE Marketing 8e)",
+    "origInfo": "Frost / E Marketing 8e",
+    "edition": "8e",
+    "lang": "bilingual",
+    "category": "marketing",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "陳玄玲_計算機概論1e.png",
+    "author": "陳玄玲",
+    "title": "計算機概論",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳尚永_廣告學 11e.png",
+    "author": "陳尚永",
+    "title": "廣告學",
+    "origInfo": "",
+    "edition": "11e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳曉萍_跨文化管理 1e.png",
+    "author": "陳曉萍",
+    "title": "跨文化管理",
+    "origInfo": "",
+    "edition": "1e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳曉萍_跨文化管理 4e.png",
+    "author": "陳曉萍",
+    "title": "跨文化管理",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳澤義_服務管理 7e.png",
+    "author": "陳澤義",
+    "title": "服務管理",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "陳澤義_科技與創新管理 6e.png",
+    "author": "陳澤義",
+    "title": "科技與創新管理",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "游慧光_個體經濟學(Pindyck Microeconomics 9e) 9e.png",
+    "author": "游慧光",
+    "title": "個體經濟學(Pindyck Microeconomics 9e)",
+    "origInfo": "Pindyck Microeconomics 9e",
+    "edition": "9e",
+    "lang": "bilingual",
+    "category": "economics",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "黃弘毅_財務數學(BrownMathematics of Finance 8e) 8e.png",
+    "author": "黃弘毅",
+    "title": "財務數學(BrownMathematics of Finance 8e)",
+    "origInfo": "Brown / Mathematics of Finance 8e",
+    "edition": "8e",
+    "lang": "bilingual",
+    "category": "finance",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "黃志典_國際財務管理概論 6e.png",
+    "author": "黃志典",
+    "title": "國際財務管理概論",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃志典_貨幣銀行學理論與應用 4e.png",
+    "author": "黃志典",
+    "title": "貨幣銀行學理論與應用",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃志典_貨幣銀行學概論 7e.png",
+    "author": "黃志典",
+    "title": "貨幣銀行學概論",
+    "origInfo": "",
+    "edition": "7e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃孟慷_工程數學 8e.png",
+    "author": "黃孟慷",
+    "title": "工程數學",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃孟慷_高等工程數學8e.png",
+    "author": "黃孟慷",
+    "title": "高等工程數學",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃延聰_行銷管理16E.png",
+    "author": "黃延聰",
+    "title": "行銷管理",
+    "origInfo": "",
+    "edition": "16e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃恆獎_管理學 3e.png",
+    "author": "黃恆獎",
+    "title": "管理學",
+    "origInfo": "",
+    "edition": "3e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃昱程_國際金融 8e.png",
+    "author": "黃昱程",
+    "title": "國際金融",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃昱程_現代金融市場 13e.png",
+    "author": "黃昱程",
+    "title": "現代金融市場",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃昱程_貨幣銀行學原理 8e.png",
+    "author": "黃昱程",
+    "title": "貨幣銀行學原理",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃昱程_期貨與選擇權：衍生性金融商品入門經典 5e.png",
+    "author": "黃昱程",
+    "title": "期貨與選擇權：衍生性金融商品入門經典",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "黃家齊_組織行為學(RobbinsOrganizational Behavior 19e) 19e.png",
+    "author": "黃家齊",
+    "title": "組織行為學(RobbinsOrganizational Behavior 19e)",
+    "origInfo": "Robbins / Organizational Behavior 19e",
+    "edition": "19e",
+    "lang": "bilingual",
+    "category": "ob_hrm",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "黃家齊_組織行為學精華版19e.png",
+    "author": "黃家齊",
+    "title": "組織行為學精華版",
+    "origInfo": "",
+    "edition": "19e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [
+      "精華/精簡版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "楊政學_企業倫理：倫理決策訂定與案例(FerrellBusiness Ethics Ethical Decision Making and Cases 13e) 13e.png",
+    "author": "楊政學",
+    "title": "企業倫理：倫理決策訂定與案例(FerrellBusiness Ethics Ethical Decision Making and Cases 13e)",
+    "origInfo": "Ferrell / Business Ethics Ethical Decision Making and Cases 13e",
+    "edition": "13e",
+    "lang": "bilingual",
+    "category": "management",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "楊政學_企業倫理：倫理決策訂定與案例13e.png",
+    "author": "楊政學",
+    "title": "企業倫理：倫理決策訂定與案例",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "zh",
+    "category": "management",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "楊雪蘭_企業研究方法(SchindlerBusiness Research Methods 13e) 13e.png",
+    "author": "楊雪蘭",
+    "title": "企業研究方法(SchindlerBusiness Research Methods 13e)",
+    "origInfo": "Schindler / Business Research Methods 13e",
+    "edition": "13e",
+    "lang": "bilingual",
+    "category": "cs_eng",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "楊景傅_行銷管理16e.png",
+    "author": "楊景傅",
+    "title": "行銷管理",
+    "origInfo": "",
+    "edition": "16e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "楊景傅_策略品牌管理 5e.png",
+    "author": "楊景傅",
+    "title": "策略品牌管理",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "溫金豐_人力資源管理：理論與實務5e.png",
+    "author": "溫金豐",
+    "title": "人力資源管理：理論與實務",
+    "origInfo": "",
+    "edition": "5e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "溫金豐_人力資源管理_基礎與應用4e.png",
+    "author": "溫金豐",
+    "title": "人力資源管理 基礎與應用",
+    "origInfo": "",
+    "edition": "4e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "溫金豐_組織理論與管理6e.png",
+    "author": "溫金豐",
+    "title": "組織理論與管理",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "ob_hrm",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "溫麗琪_法律經濟學(Cooter Law and Economics 6e) 6e.png",
+    "author": "溫麗琪",
+    "title": "法律經濟學(Cooter Law and Economics 6e)",
+    "origInfo": "Cooter Law and Economics 6e",
+    "edition": "6e",
+    "lang": "bilingual",
+    "category": "economics",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "劉亞秋_財務管理 3e.png",
+    "author": "劉亞秋",
+    "title": "財務管理",
+    "origInfo": "",
+    "edition": "3e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "劉哲宏_資訊管理(KroenkeExperiencing MIS 8e) 8e.png",
+    "author": "劉哲宏",
+    "title": "資訊管理(KroenkeExperiencing MIS 8e)",
+    "origInfo": "Kroenke / Experiencing MIS 8e",
+    "edition": "8e",
+    "lang": "bilingual",
+    "category": "cs_eng",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "歐陽溥蔓_國際經濟學_國際金融 12e.png",
+    "author": "歐陽溥蔓",
+    "title": "國際經濟學 國際金融",
+    "origInfo": "",
+    "edition": "12e",
+    "lang": "zh",
+    "category": "economics",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "蔡緣_國際貿易實務 34e.png",
+    "author": "蔡緣",
+    "title": "國際貿易實務",
+    "origInfo": "",
+    "edition": "34e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "蔡穎義_數理經濟學(ChiangFundamental Methods of Mathematical Economics 4e) 4e.png",
+    "author": "蔡穎義",
+    "title": "數理經濟學(ChiangFundamental Methods of Mathematical Economics 4e)",
+    "origInfo": "Chiang / Fundamental Methods of Mathematical Economics 4e",
+    "edition": "4e",
+    "lang": "bilingual",
+    "category": "economics",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "鄧旭茹_企業管理(Nickels Understanding Business 13e) 13e.png",
+    "author": "鄧旭茹",
+    "title": "企業管理(Nickels Understanding Business 13e)",
+    "origInfo": "Nickels Understanding Business 13e",
+    "edition": "13e",
+    "lang": "bilingual",
+    "category": "management",
+    "tags": [
+      "中譯經典教材"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "鄭子韋_微積分(精華版)10e.png",
+    "author": "鄭子韋",
+    "title": "微積分(精華版)",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "檔名格式重複",
+      "精華/精簡版"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "鄭子韋_微積分精華版 10e(作者名字有誤).png",
+    "author": "鄭子韋",
+    "title": "微積分精華版 [作者名字有誤]",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "檔名標註有誤",
+      "精華/精簡版"
+    ],
+    "isVariant": true
+  },
+  {
+    "file": "鄭子韋_微積分精華版 10e.png",
+    "author": "鄭子韋",
+    "title": "微積分精華版",
+    "origInfo": "",
+    "edition": "10e",
+    "lang": "zh",
+    "category": "quant",
+    "tags": [
+      "精華/精簡版"
+    ],
+    "isVariant": false
+  },
+  {
+    "file": "鄭自隆_廣告策略與管理：理論與案例交鋒對話 2e.png",
+    "author": "鄭自隆",
+    "title": "廣告策略與管理：理論與案例交鋒對話",
+    "origInfo": "",
+    "edition": "2e",
+    "lang": "zh",
+    "category": "marketing",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "鄭榮治_壽險數理要義：精算師入門基石 6e.png",
+    "author": "鄭榮治",
+    "title": "壽險數理要義：精算師入門基石",
+    "origInfo": "",
+    "edition": "6e",
+    "lang": "zh",
+    "category": "finance",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "賴奎魁_專案管理 8e.png",
+    "author": "賴奎魁",
+    "title": "專案管理",
+    "origInfo": "",
+    "edition": "8e",
+    "lang": "zh",
+    "category": "hospitality_elt",
+    "tags": [],
+    "isVariant": false
+  },
+  {
+    "file": "鍾俊仁_系統分析與設計 13e.png",
+    "author": "鍾俊仁",
+    "title": "系統分析與設計",
+    "origInfo": "",
+    "edition": "13e",
+    "lang": "zh",
+    "category": "cs_eng",
+    "tags": [],
+    "isVariant": false
+  }
+];
+
+    // ============================================================================
+    // 3. DYNAMIC PARSER FOR NEW OR EDITED FILENAMES
+    // ============================================================================
+    function parseTextbookFilename(rawFilename) {
+      const cleanName = rawFilename.trim().replace(/^.*[\\/]/, '');
+      const base = cleanName.replace(/\.(jpg|jpeg|png|webp|gif|svg|bmp|pdf)$/i, '').trim();
+
+      if (base === 'EMI師資增能') {
+        return {
+          rawFilename: cleanName,
+          author: '專案教材',
+          title: 'EMI 全英語授課師資增能專題',
+          origInfo: 'English as a Medium of Instruction',
+          edition: '專題圖',
+          lang: 'zh',
+          category: 'cs_eng',
+          tags: ['EMI全英授課', '專題圖卡'],
+          isVariant: false
+        };
+      }
+      if (base === 'Hoffmann VS Larson') {
+        return {
+          rawFilename: cleanName,
+          author: 'Hoffmann / Larson',
+          title: 'Hoffmann VS Larson 微積分教材比較圖',
+          origInfo: 'Applied Calculus Comparison',
+          edition: '比較圖',
+          lang: 'en',
+          category: 'quant',
+          tags: ['教材比較圖卡', '微積分'],
+          isVariant: false
+        };
+      }
+
+      const tags = [];
+      let isVariant = false;
+      if (/\([23]\)$/.test(base)) {
+        isVariant = true;
+        tags.push('重複副本圖檔');
+      }
+      if (base.includes('有誤')) {
+        isVariant = true;
+        tags.push('檔名標註有誤');
+      }
+      if (base.includes('eBook')) tags.push('eBook數位教材');
+      if (base.includes('2026 Release')) tags.push('2026 Release');
+      else if (base.includes('2025 Release')) tags.push('2025 Release');
+      else if (base.includes('2024 Release')) tags.push('2024 Release');
+      if (base.includes('(GE)') || base.includes('(Global Edition)')) tags.push('GE國際版');
+      if (base.includes('Asia Edition')) tags.push('亞洲版');
+      if (base.includes('Custom') || base.includes('for 企管系')) tags.push('客製版教材');
+      if (base.includes('精華版') || base.includes('精簡版')) tags.push('精華/精簡版');
+
+      const parts = base.split('_');
+      const author = (parts[0] || '未標示').trim();
+      let rest = parts.length > 1 ? parts.slice(1).join('_').trim() : base;
+
+      rest = rest.replace(/\s*\([23]\)\s*$/, '');
+      let noteStr = '';
+      const noteMatch = rest.match(/\((書名有誤|作者名字有誤)\)/);
+      if (noteMatch) {
+        noteStr = noteMatch[1];
+        rest = rest.replace(noteMatch[0], '').trim();
+      }
+      rest = rest.replace(/^eBook_?/, '').trim();
+
+      let forDept = '';
+      const deptMatch = rest.match(/\s+(for\s+[\u4e00-\u9fa5A-Za-z0-9]+)$/);
+      if (deptMatch && /[\u4e00-\u9fa5]/.test(deptMatch[1])) {
+        forDept = deptMatch[1].trim();
+        rest = rest.slice(0, deptMatch.index).trim();
+      }
+
+      let edition = '';
+      const edMatch = rest.match(/(?:[_\s]+|(?<=[\u4e00-\u9fa5)）a-zA-Z]))(\d{1,2}[eE]|\bsi\b)$/);
+      if (edMatch) {
+        edition = edMatch[1].toLowerCase() === 'si' ? 'SI版' : edMatch[1].toLowerCase();
+        rest = rest.slice(0, edMatch.index).trim();
+      } else {
+        const innerEd = rest.match(/\b(\d{1,2}[eE])\s*[)）]$/);
+        if (innerEd) {
+          edition = innerEd[1].toLowerCase();
+        } else {
+          const relMatch = rest.match(/\((202\d)\s*Release\)/);
+          if (relMatch) edition = relMatch[1] + '版';
+        }
+      }
+      if (!edition) edition = '通用版';
+
+      if (forDept) rest += ` (${forDept})`;
+      if (noteStr) rest += ` [${noteStr}]`;
+
+      let origInfo = '';
+      const origMatch = rest.match(/[（(]([A-Za-z][^）)]*)[）)]/);
+      if (origMatch && /[\u4e00-\u9fa5]/.test(author)) {
+        const cand = origMatch[1].trim();
+        if (!cand.startsWith('202') && !['GE', 'ISE', 'PNIE', 'Original', 'Global Edition', 'Asia Edition', 'Custom Edition'].includes(cand)) {
+          origInfo = cand.replace(/([a-z])([A-Z])/, '$1 / $2');
+          tags.push('中譯經典教材');
+        }
+      }
+
+      const title = rest.replace(/_/g, ' ').trim();
+      const hasZhAuthor = /[\u4e00-\u9fa5]/.test(author);
+      const hasZhTitle = /[\u4e00-\u9fa5]/.test(title);
+      let lang = 'zh';
+      if (!hasZhAuthor && !hasZhTitle) lang = 'en';
+      else if (origInfo || (!hasZhAuthor && hasZhTitle)) lang = 'bilingual';
+
+      const textAll = `${author} ${title} ${origInfo}`.toLowerCase();
+      let category = 'management';
+      for (const cat of CATEGORIES) {
+        if (cat.keywords.some(k => textAll.includes(k.toLowerCase()))) {
+          if (cat.id === 'finance' && textAll.includes('國際經濟學')) continue;
+          category = cat.id;
+          break;
+        }
+      }
+
+      return {
+        rawFilename: cleanName,
+        author,
+        title,
+        origInfo,
+        edition,
+        lang,
+        category,
+        tags,
+        isVariant
+      };
+    }
+
+    // ============================================================================
+    // 4. APPLICATION STATE
+    // ============================================================================
+    let books = [];
+    let activeCategory = 'all';
+    let activeLang = 'all';
+    let activeAuthorInitial = 'all';
+    let variantMode = 'all'; // 'all' | 'unique' | 'variants'
+    let searchQuery = '';
+    let sortBy = 'category';
+    let viewMode = 'grid'; // 'grid' | 'table' | 'grouped'
+    let currentLightboxBookId = null;
+    let currentZoom = 1;
+    let hasLocalBlobFiles = false;
+
+    function initApp() {
+      loadCatalogFrom193();
+      try {
+        const savedOverrides = localStorage.getItem('textbook_catalog_overrides_v2');
+        if (savedOverrides) {
+          const map = JSON.parse(savedOverrides);
+          books.forEach(b => {
+            if (map[b.rawFilename]) {
+              Object.assign(b, map[b.rawFilename]);
+            }
+          });
+        }
+      } catch (e) {}
+      renderAll();
+      updateLiveParserPreview(document.getElementById('liveParserInput').value);
+      setupDragAndDrop();
+      setupKeyboardShortcuts();
+    }
+
+    function loadCatalogFrom193() {
+      hasLocalBlobFiles = false;
+      books = INITIAL_CATALOG_193.map((item, idx) => ({
+        id: 'book_' + idx,
+        rawFilename: item.file,
+        author: item.author,
+        title: item.title,
+        origInfo: item.origInfo || '',
+        edition: item.edition,
+        lang: item.lang,
+        category: item.category,
+        tags: [...(item.tags || [])],
+        isVariant: Boolean(item.isVariant),
+        imageUrl: null,
+        seq: idx + 1
+      }));
+      updateDatasetBadge();
+    }
+
+    function updateDatasetBadge() {
+      const badge = document.getElementById('datasetModeBadge');
+      if (!badge) return;
+      if (hasLocalBlobFiles) {
+        const matchedCount = books.filter(b => b.imageUrl).length;
+        badge.className = 'text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30';
+        badge.textContent = `已載入本機高畫質原圖 (${matchedCount} / ${books.length} 張)`;
+      } else {
+        badge.className = 'text-[11px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30';
+        badge.textContent = `已內建完整 ${books.length} 張產品圖索引`;
+      }
+    }
+
+    // ============================================================================
+    // 5. SVG PRODUCT INFO CARD GENERATOR
+    // ============================================================================
+    function generateBookInfoGraphicSvgDataUri(book) {
+      const cat = CATEGORIES.find(c => c.id === book.category) || CATEGORIES[2];
+      const langLabel = LANG_LABELS[book.lang] ? LANG_LABELS[book.lang].label : '教科書';
+      const safeTitle = escapeXml(book.title.length > 26 ? book.title.slice(0, 25) + '…' : book.title);
+      const safeAuthor = escapeXml(book.author);
+      const safeEdition = escapeXml(book.edition);
+      const safeCat = escapeXml(cat.name);
+      const safeOrig = escapeXml((book.origInfo || '高教專業教材').slice(0, 42));
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="100%" height="100%">
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0B1F3A"/>
+            <stop offset="100%" stop-color="#1D4477"/>
+          </linearGradient>
+        </defs>
+        <rect width="640" height="480" fill="#F8FAFC"/>
+        <rect width="640" height="118" fill="url(#bgGrad)"/>
+        <rect y="114" width="640" height="6" fill="${cat.accentColor}"/>
+        <text x="32" y="44" fill="#94A3B8" font-family="sans-serif" font-size="14" font-weight="bold" letter-spacing="1.5">PRODUCT INFO #${book.seq || 1}｜${safeCat}</text>
+        <text x="32" y="86" fill="#FFFFFF" font-family="serif" font-size="24" font-weight="bold">${safeTitle}</text>
+        <rect x="510" y="26" width="98" height="36" rx="18" fill="${cat.accentColor}"/>
+        <text x="559" y="50" fill="#FFFFFF" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">${safeEdition}</text>
+
+        <rect x="36" y="146" width="176" height="254" rx="10" fill="#0B1F3A" stroke="#CBD5E1" stroke-width="2"/>
+        <rect x="36" y="146" width="15" height="254" rx="4" fill="${cat.accentColor}"/>
+        <text x="130" y="198" fill="#94A3B8" font-family="sans-serif" font-size="12" text-anchor="middle">${escapeXml(langLabel)}</text>
+        <text x="130" y="246" fill="#FFFFFF" font-family="serif" font-size="17" font-weight="bold" text-anchor="middle">${escapeXml(book.title.slice(0, 9))}</text>
+        <text x="130" y="272" fill="#FFFFFF" font-family="serif" font-size="15" font-weight="bold" text-anchor="middle">${escapeXml(book.title.slice(9, 18))}</text>
+        <text x="130" y="340" fill="#FBBF24" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle">${safeAuthor}</text>
+        <text x="130" y="372" fill="#94A3B8" font-family="monospace" font-size="13" text-anchor="middle">${safeEdition}</text>
+
+        <rect x="236" y="146" width="368" height="74" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+        <text x="256" y="174" fill="#64748B" font-family="sans-serif" font-size="12" font-weight="bold">作者 (AUTHOR) ＆ 版次 (EDITION)</text>
+        <text x="256" y="202" fill="#0F172A" font-family="sans-serif" font-size="18" font-weight="bold">${safeAuthor}  ｜  ${safeEdition}</text>
+
+        <rect x="236" y="232" width="368" height="74" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+        <text x="256" y="260" fill="#64748B" font-family="sans-serif" font-size="12" font-weight="bold">學科分類與原文／版本資訊</text>
+        <text x="256" y="288" fill="${cat.accentColor}" font-family="sans-serif" font-size="15" font-weight="bold">${safeOrig}</text>
+
+        <rect x="236" y="318" width="368" height="82" rx="10" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1.5"/>
+        <text x="256" y="346" fill="#475569" font-family="sans-serif" font-size="12" font-weight="bold">對應圖檔名稱 (點擊上方「選擇資料夾」即顯示原圖)</text>
+        <text x="256" y="374" fill="#0F172A" font-family="monospace" font-size="12">${escapeXml(book.rawFilename.slice(0, 42))}</text>
+
+        <text x="36" y="445" fill="#64748B" font-family="sans-serif" font-size="13">💡 將網頁放進圖片資料夾或點擊上方「📂 選擇資料夾」，即可直接檢視高解析度產品資訊圖</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function escapeXml(unsafe) {
+      return String(unsafe || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // ============================================================================
+    // 6. FILTERING, SORTING & AUTHOR INITIALS
+    // ============================================================================
+    function getAuthorInitial(author) {
+      const clean = String(author || '').trim();
+      if (!clean || clean === '未標示') return '#';
+      const firstChar = clean.charAt(0);
+      if (/[A-Za-z]/.test(firstChar)) {
+        return firstChar.toUpperCase();
+      }
+      return firstChar;
+    }
+
+    function getBasePoolByVariantMode() {
+      if (variantMode === 'unique') {
+        return books.filter(b => !b.isVariant);
+      }
+      if (variantMode === 'variants') {
+        return books.filter(b => b.isVariant);
+      }
+      return books;
+    }
+
+    function getFilteredBooks() {
+      const q = searchQuery.trim().toLowerCase();
+      const pool = getBasePoolByVariantMode();
+
+      let list = pool.filter(book => {
+        if (activeCategory !== 'all' && book.category !== activeCategory) return false;
+        if (activeLang !== 'all' && book.lang !== activeLang) return false;
+        if (activeAuthorInitial !== 'all' && getAuthorInitial(book.author) !== activeAuthorInitial) {
+          return false;
+        }
+        if (q) {
+          const catObj = CATEGORIES.find(c => c.id === book.category);
+          const catName = catObj ? catObj.name : '';
+          const haystack = `${book.author} ${book.title} ${book.origInfo || ''} ${book.edition} ${book.rawFilename} ${catName} ${(book.tags || []).join(' ')}`.toLowerCase();
+          if (!haystack.includes(q)) return false;
+        }
+        return true;
+      });
+
+      list.sort((a, b) => {
+        if (sortBy === 'author') {
+          return a.author.localeCompare(b.author, 'zh-Hant');
+        }
+        if (sortBy === 'title') {
+          return a.title.localeCompare(b.title, 'zh-Hant');
+        }
+        if (sortBy === 'edition_desc') {
+          const numA = parseInt(a.edition.replace(/\D/g, ''), 10) || 0;
+          const numB = parseInt(b.edition.replace(/\D/g, ''), 10) || 0;
+          return numB - numA || a.title.localeCompare(b.title, 'zh-Hant');
+        }
+        if (sortBy === 'filename') {
+          return (a.seq || 0) - (b.seq || 0);
+        }
+        const idxA = CATEGORIES.findIndex(c => c.id === a.category);
+        const idxB = CATEGORIES.findIndex(c => c.id === b.category);
+        if (idxA !== idxB) return idxA - idxB;
+        return a.author.localeCompare(b.author, 'zh-Hant');
+      });
+
+      return list;
+    }
+
+    // ============================================================================
+    // 7. RENDERING FUNCTIONS
+    // ============================================================================
+    function renderAll() {
+      renderStats();
+      renderLangFilters();
+      renderCategorySidebar();
+      renderAuthorIndex();
+      renderBreadcrumbs();
+      renderCatalog();
+    }
+
+    function renderStats() {
+      const pool = getBasePoolByVariantMode();
+      const total = pool.length;
+      const zhCount = pool.filter(b => b.lang === 'zh' || b.lang === 'bilingual').length;
+      const enCount = pool.filter(b => b.lang === 'en').length;
+
+      document.getElementById('statTotalCount').textContent = total;
+      document.getElementById('statZhCount').textContent = zhCount;
+      document.getElementById('statEnCount').textContent = enCount;
+
+      const uniqueCount = books.filter(b => !b.isVariant).length;
+      const varCount = books.filter(b => b.isVariant).length;
+      const btnAll = document.getElementById('varBtnAll');
+      const btnUnique = document.getElementById('varBtnUnique');
+      const btnOnly = document.getElementById('varBtnOnly');
+      if (btnAll && btnUnique && btnOnly) {
+        btnAll.textContent = `全部 (${books.length})`;
+        btnUnique.textContent = `唯一 (${uniqueCount})`;
+        btnOnly.textContent = `重複/勘誤(${varCount})`;
+        btnAll.className = `px-2 py-1.5 rounded-lg text-[11px] font-semibold transition ${variantMode === 'all' ? 'bg-navy-900 text-white shadow-sm' : 'bg-ivory-50 text-slate-700 hover:bg-ivory-100 border border-ivory-200'}`;
+        btnUnique.className = `px-2 py-1.5 rounded-lg text-[11px] font-semibold transition ${variantMode === 'unique' ? 'bg-emerald-700 text-white shadow-sm' : 'bg-ivory-50 text-slate-700 hover:bg-ivory-100 border border-ivory-200'}`;
+        btnOnly.className = `px-2 py-1.5 rounded-lg text-[11px] font-semibold transition ${variantMode === 'variants' ? 'bg-amber-600 text-white shadow-sm' : 'bg-ivory-50 text-amber-800 hover:bg-amber-50 border border-ivory-200'}`;
+      }
+
+      const isFiltering = activeCategory !== 'all' || activeLang !== 'all' || activeAuthorInitial !== 'all' || variantMode !== 'all' || searchQuery.trim() !== '';
+      const indicator = document.getElementById('activeFilterIndicator');
+      if (indicator) {
+        indicator.classList.toggle('hidden', !isFiltering);
+      }
+    }
+
+    function renderLangFilters() {
+      const pool = getBasePoolByVariantMode();
+      const counts = {
+        all: pool.length,
+        zh: pool.filter(b => b.lang === 'zh').length,
+        bilingual: pool.filter(b => b.lang === 'bilingual').length,
+        en: pool.filter(b => b.lang === 'en').length
+      };
+      const items = [
+        { id: 'all', label: '全部教材', count: counts.all },
+        { id: 'zh', label: '中文教科書', count: counts.zh },
+        { id: 'bilingual', label: '中譯／雙語', count: counts.bilingual },
+        { id: 'en', label: '英文原文書', count: counts.en }
+      ];
+      const container = document.getElementById('langFilterContainer');
+      container.innerHTML = items.map(item => {
+        const active = activeLang === item.id;
+        return `<button
+          type="button"
+          onclick="setLangFilter('${item.id}')"
+          class="px-2.5 py-2 rounded-xl text-xs font-semibold flex items-center justify-between transition border ${
+            active
+              ? 'bg-navy-900 text-white border-navy-900 shadow-sm'
+              : 'bg-ivory-50 text-slate-700 border-ivory-200 hover:bg-ivory-100'
+          }"
+        >
+          <span class="truncate">${item.label}</span>
+          <span class="font-mono text-[11px] px-1.5 py-0.2 rounded-full ${active ? 'bg-white/20 text-white' : 'bg-white text-slate-500'}">${item.count}</span>
+        </button>`;
+      }).join('');
+    }
+
+    function renderCategorySidebar() {
+      const pool = getBasePoolByVariantMode();
+      const container = document.getElementById('categoryListContainer');
+      const allActive = activeCategory === 'all';
+
+      let html = `<button
+        type="button"
+        onclick="setCategoryFilter('all')"
+        class="w-full px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition ${
+          allActive ? 'bg-crimson-600 text-white shadow-sm' : 'text-slate-700 hover:bg-ivory-100'
+        }"
+      >
+        <span class="flex items-center gap-2">
+          <span>📚</span>
+          <span>全部學科領域</span>
+        </span>
+        <span class="font-mono text-[11px] px-2 py-0.5 rounded-full ${allActive ? 'bg-white/20 text-white' : 'bg-ivory-100 text-slate-600'}">${pool.length}</span>
+      </button>`;
+
+      for (const cat of CATEGORIES) {
+        const count = pool.filter(b => b.category === cat.id).length;
+        const active = activeCategory === cat.id;
+        html += `<button
+          type="button"
+          onclick="setCategoryFilter('${cat.id}')"
+          class="w-full px-3 py-2.5 rounded-xl text-xs font-semibold flex items-center justify-between transition ${
+            active ? 'bg-navy-900 text-white shadow-sm' : 'text-slate-700 hover:bg-ivory-100'
+          }"
+        >
+          <span class="flex items-center gap-2 truncate">
+            <span>${cat.icon}</span>
+            <span class="truncate">${cat.name}</span>
+          </span>
+          <span class="font-mono text-[11px] px-2 py-0.5 rounded-full shrink-0 ${
+            active ? 'bg-white/20 text-white' : count > 0 ? 'bg-ivory-100 text-navy-900 font-bold' : 'bg-slate-50 text-slate-300'
+          }">${count}</span>
+        </button>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderAuthorIndex() {
+      const pool = getBasePoolByVariantMode();
+      const initialsMap = new Map();
+      pool.forEach(b => {
+        const init = getAuthorInitial(b.author);
+        initialsMap.set(init, (initialsMap.get(init) || 0) + 1);
+      });
+      const sortedInitials = Array.from(initialsMap.keys()).sort((a, b) => {
+        const isEngA = /[A-Z]/.test(a);
+        const isEngB = /[A-Z]/.test(b);
+        if (isEngA && !isEngB) return -1;
+        if (!isEngA && isEngB) return 1;
+        return a.localeCompare(b, 'zh-Hant');
+      });
+
+      document.getElementById('selectedAuthorLetterLabel').textContent =
+        activeAuthorInitial === 'all' ? '全部作者' : `字首：${activeAuthorInitial}`;
+
+      const container = document.getElementById('authorIndexContainer');
+      let html = `<button
+        type="button"
+        onclick="setAuthorInitial('all')"
+        class="px-2 py-1 rounded-lg text-[11px] font-mono font-semibold transition ${
+          activeAuthorInitial === 'all'
+            ? 'bg-navy-900 text-white'
+            : 'bg-ivory-50 text-slate-600 hover:bg-ivory-100 border border-ivory-200'
+        }"
+      >全部</button>`;
+
+      sortedInitials.forEach(init => {
+        const active = activeAuthorInitial === init;
+        html += `<button
+          type="button"
+          onclick="setAuthorInitial('${escapeHtml(init)}')"
+          title="${escapeHtml(init)} (${initialsMap.get(init)} 本)"
+          class="min-w-[28px] px-1.5 py-1 rounded-lg text-[11px] font-mono font-semibold transition ${
+            active
+              ? 'bg-crimson-600 text-white shadow-sm'
+              : 'bg-ivory-50 text-navy-900 hover:bg-ivory-100 border border-ivory-200'
+          }"
+        >${escapeHtml(init)}</button>`;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderBreadcrumbs() {
+      const filtered = getFilteredBooks();
+      document.getElementById('resultCountText').textContent = `顯示 ${filtered.length} / 共 ${books.length} 筆產品資訊圖`;
+
+      const chips = [];
+      if (variantMode === 'unique') {
+        chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-700 text-white text-xs font-medium">
+          <span>✨ 僅顯示唯一書目 (已隱藏 18 張重複/勘誤圖檔)</span>
+          <button type="button" onclick="setVariantMode('all')" class="hover:text-amber-200">✕</button>
+        </span>`);
+      } else if (variantMode === 'variants') {
+        chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-600 text-white text-xs font-medium">
+          <span>🔍 檢視重複副本與檔名勘誤 (18 筆)</span>
+          <button type="button" onclick="setVariantMode('all')" class="hover:text-amber-200">✕</button>
+        </span>`);
+      }
+      if (activeCategory !== 'all') {
+        const cat = CATEGORIES.find(c => c.id === activeCategory);
+        if (cat) {
+          chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-navy-900 text-white text-xs font-medium">
+            <span>${cat.icon} ${cat.name}</span>
+            <button type="button" onclick="setCategoryFilter('all')" class="hover:text-amber-300">✕</button>
+          </span>`);
+        }
+      }
+      if (activeLang !== 'all') {
+        const l = LANG_LABELS[activeLang];
+        if (l) {
+          chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-crimson-600 text-white text-xs font-medium">
+            <span>${l.label}</span>
+            <button type="button" onclick="setLangFilter('all')" class="hover:text-amber-200">✕</button>
+          </span>`);
+        }
+      }
+      if (activeAuthorInitial !== 'all') {
+        chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-600 text-white text-xs font-medium">
+          <span>作者字首：${escapeHtml(activeAuthorInitial)}</span>
+          <button type="button" onclick="setAuthorInitial('all')" class="hover:text-amber-200">✕</button>
+        </span>`);
+      }
+      if (searchQuery.trim() !== '') {
+        chips.push(`<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 text-white text-xs font-medium">
+          <span>關鍵字：「${escapeHtml(searchQuery)}」</span>
+          <button type="button" onclick="clearSearch()" class="hover:text-amber-200">✕</button>
+        </span>`);
+      }
+
+      const chipContainer = document.getElementById('activeFilterChips');
+      if (chips.length === 0) {
+        chipContainer.innerHTML = `<span class="text-slate-500">目前顯示完整 193 筆書目索引（點擊任一圖卡可放大檢視產品資訊圖或微調分類）</span>`;
+      } else {
+        chipContainer.innerHTML = chips.join('') + `<button type="button" onclick="resetAllFilters()" class="text-xs text-crimson-600 hover:underline font-semibold ml-1">清除全部條件</button>`;
+      }
+    }
+
+    function getBookImageSrc(book) {
+      if (book.imageUrl) return book.imageUrl;
+      if (window.location && window.location.protocol === 'file:') {
+        return './' + encodeURIComponent(book.rawFilename);
+      }
+      return generateBookInfoGraphicSvgDataUri(book);
+    }
+
+    function renderCatalog() {
+      const filtered = getFilteredBooks();
+      const container = document.getElementById('catalogContainer');
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-2xl p-12 text-center border border-ivory-200 shadow-sm">
+            <div class="text-4xl mb-3">🔍</div>
+            <h3 class="serif-title text-lg font-bold text-navy-900">找不到符合篩選條件的產品資訊圖</h3>
+            <p class="text-xs text-slate-500 mt-1 max-w-md mx-auto">請嘗試放寬關鍵字、切換其他學科領域，或點擊下方按鈕重設篩選條件。</p>
+            <button type="button" onclick="resetAllFilters()" class="mt-4 px-4 py-2 rounded-xl bg-crimson-600 text-white text-xs font-semibold hover:bg-crimson-500 transition">
+              重設所有篩選條件
+            </button>
+          </div>`;
+        return;
+      }
+
+      if (viewMode === 'grid') {
+        renderGridView(filtered, container);
+      } else if (viewMode === 'table') {
+        renderTableView(filtered, container);
+      } else {
+        renderGroupedView(filtered, container);
+      }
+    }
+
+    function renderGridView(filtered, container) {
+      container.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+          ${filtered.map(book => renderBookCardHtml(book)).join('')}
+        </div>
+      `;
+    }
+
+    function renderBookCardHtml(book) {
+      const cat = CATEGORIES.find(c => c.id === book.category) || CATEGORIES[2];
+      const langInfo = LANG_LABELS[book.lang] || LANG_LABELS.zh;
+      const imgSrc = getBookImageSrc(book);
+
+      return `
+        <article
+          onclick="openLightbox('${book.id}')"
+          class="book-card cursor-pointer bg-white rounded-2xl border ${book.isVariant ? 'border-amber-300' : 'border-ivory-200'} overflow-hidden flex flex-col justify-between shadow-sm group"
+        >
+          <div>
+            <!-- Image Thumbnail Frame -->
+            <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden border-b border-ivory-200">
+              <img
+                src="${imgSrc}"
+                alt="${escapeHtml(book.title)}"
+                loading="lazy"
+                onerror="this.onerror=null; this.src=generateBookInfoGraphicSvgDataUriById('${book.id}');"
+                class="w-full h-full object-contain bg-slate-900 group-hover:scale-[1.03] transition-transform duration-300"
+              />
+              <!-- Top Overlay Badges -->
+              <div class="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-1 pointer-events-none">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border shadow-sm ${cat.badgeClass}">
+                  ${cat.icon} ${cat.name}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-navy-900/90 text-amber-300 border border-white/15 shadow-sm">
+                  ${escapeHtml(book.edition)}
+                </span>
+              </div>
+              <!-- Hover Zoom Hint -->
+              <div class="absolute inset-0 bg-navy-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span class="px-3.5 py-1.5 rounded-full bg-white text-navy-900 text-xs font-bold shadow-lg flex items-center gap-1.5">
+                  <span>🔍 放大檢視資訊圖</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Parsed Metadata Body -->
+            <div class="p-4">
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="text-xs font-bold text-crimson-600 truncate" title="作者：${escapeHtml(book.author)}">
+                  👤 ${escapeHtml(book.author)}
+                </span>
+                <span class="text-[11px] px-2 py-0.5 rounded-md font-medium shrink-0 ${langInfo.badge}">
+                  ${langInfo.label}
+                </span>
+              </div>
+
+              <h3 class="serif-title font-bold text-base text-navy-900 leading-snug line-clamp-2 group-hover:text-crimson-600 transition-colors" title="${escapeHtml(book.title)}">
+                ${escapeHtml(book.title)}
+              </h3>
+
+              ${
+                book.origInfo
+                  ? `<div class="text-[11px] font-mono text-slate-500 truncate mt-1" title="${escapeHtml(book.origInfo)}">原作：${escapeHtml(book.origInfo)}</div>`
+                  : ''
+              }
+
+              ${
+                book.tags && book.tags.length > 0
+                  ? `<div class="flex flex-wrap gap-1 mt-2.5">
+                      ${book.tags.map(t => `<span class="text-[10px] font-medium px-2 py-0.5 rounded ${t.includes('重複') || t.includes('有誤') ? 'bg-amber-100 text-amber-900 font-bold' : 'bg-ivory-100 text-slate-600'}">${escapeHtml(t)}</span>`).join('')}
+                    </div>`
+                  : ''
+              }
+            </div>
+          </div>
+
+          <!-- Footer Filename Bar -->
+          <div class="px-4 py-2.5 bg-ivory-50 border-t border-ivory-200 flex items-center justify-between gap-2 text-[11px] text-slate-500">
+            <span class="font-mono truncate" title="${escapeHtml(book.rawFilename)}">#${book.seq || ''} ${escapeHtml(book.rawFilename)}</span>
+            <span class="text-navy-800 font-semibold shrink-0 group-hover:translate-x-0.5 transition-transform">詳情 →</span>
+          </div>
+        </article>
+      `;
+    }
+
+    function generateBookInfoGraphicSvgDataUriById(bookId) {
+      const book = books.find(b => b.id === bookId);
+      if (!book) return '';
+      return generateBookInfoGraphicSvgDataUri(book);
+    }
+
+    function renderTableView(filtered, container) {
+      container.innerHTML = `
+        <div class="bg-white rounded-2xl border border-ivory-200 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-navy-900 text-white text-xs uppercase tracking-wider">
+                  <th class="py-3 px-4 font-semibold">#</th>
+                  <th class="py-3 px-4 font-semibold">學科分類 (可直接切換)</th>
+                  <th class="py-3 px-4 font-semibold">語系</th>
+                  <th class="py-3 px-4 font-semibold">作者 (Author)</th>
+                  <th class="py-3 px-4 font-semibold">書名 (Book Title)</th>
+                  <th class="py-3 px-4 font-semibold">版次</th>
+                  <th class="py-3 px-4 font-semibold">原始檔名</th>
+                  <th class="py-3 px-4 font-semibold text-right">操作</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-ivory-200 text-xs sm:text-sm">
+                ${filtered.map((book, idx) => {
+                  const langInfo = LANG_LABELS[book.lang] || LANG_LABELS.zh;
+                  return `
+                    <tr class="hover:bg-ivory-50 transition ${book.isVariant ? 'bg-amber-50/40' : ''}">
+                      <td class="py-2.5 px-4 font-mono text-xs text-slate-400">${book.seq || idx + 1}</td>
+                      <td class="py-2.5 px-4">
+                        <select
+                          aria-label="變更學科分類"
+                          onchange="quickChangeCategory('${book.id}', this.value)"
+                          class="px-2.5 py-1 rounded-lg bg-ivory-50 border border-ivory-200 text-xs font-semibold text-navy-900 focus:outline-none focus:ring-1 focus:ring-crimson-600"
+                        >
+                          ${CATEGORIES.map(c => `<option value="${c.id}" ${c.id === book.category ? 'selected' : ''}>${c.icon} ${c.name}</option>`).join('')}
+                        </select>
+                      </td>
+                      <td class="py-2.5 px-4">
+                        <span class="text-[11px] px-2 py-0.5 rounded-md font-medium whitespace-nowrap ${langInfo.badge}">
+                          ${langInfo.label}
+                        </span>
+                      </td>
+                      <td class="py-2.5 px-4 font-bold text-navy-900 whitespace-nowrap">${escapeHtml(book.author)}</td>
+                      <td class="py-2.5 px-4 font-semibold text-navy-900">
+                        <button type="button" onclick="openLightbox('${book.id}')" class="text-left hover:text-crimson-600 transition">
+                          ${escapeHtml(book.title)}
+                        </button>
+                      </td>
+                      <td class="py-2.5 px-4 font-mono text-xs font-bold text-crimson-600 whitespace-nowrap">${escapeHtml(book.edition)}</td>
+                      <td class="py-2.5 px-4 font-mono text-xs text-slate-500 max-w-[240px] truncate" title="${escapeHtml(book.rawFilename)}">${escapeHtml(book.rawFilename)}</td>
+                      <td class="py-2.5 px-4 text-right whitespace-nowrap">
+                        <button
+                          type="button"
+                          onclick="openLightbox('${book.id}')"
+                          class="px-2.5 py-1 rounded-lg bg-navy-900 hover:bg-crimson-600 text-white text-xs font-semibold transition"
+                        >
+                          檢視圖卡
+                        </button>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderGroupedView(filtered, container) {
+      const groups = CATEGORIES.map(cat => ({
+        cat,
+        items: filtered.filter(b => b.category === cat.id)
+      })).filter(g => g.items.length > 0);
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          ${groups.map(group => `
+            <section class="bg-white rounded-2xl border border-ivory-200 shadow-sm overflow-hidden">
+              <div class="bg-navy-900 text-white px-5 py-3 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-lg">${group.cat.icon}</span>
+                  <h3 class="serif-title font-bold text-base">${group.cat.name}</h3>
+                </div>
+                <span class="font-mono text-xs px-2.5 py-0.5 rounded-full bg-white/15 text-amber-300">
+                  共 ${group.items.length} 本教材
+                </span>
+              </div>
+              <div class="p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                ${group.items.map(book => {
+                  const langInfo = LANG_LABELS[book.lang] || LANG_LABELS.zh;
+                  return `
+                    <div
+                      onclick="openLightbox('${book.id}')"
+                      class="cursor-pointer p-3.5 rounded-xl bg-ivory-50 hover:bg-white border border-ivory-200 hover:border-crimson-600/50 transition flex items-start justify-between gap-3 shadow-sm"
+                    >
+                      <div class="min-w-0">
+                        <div class="flex items-center gap-1.5 mb-1 flex-wrap">
+                          <span class="text-xs font-bold text-crimson-600">${escapeHtml(book.author)}</span>
+                          <span class="text-slate-300">•</span>
+                          <span class="text-[11px] font-mono font-bold text-navy-900 bg-amber-100 px-1.5 py-0.2 rounded">${escapeHtml(book.edition)}</span>
+                          <span class="text-[10px] px-1.5 py-0.2 rounded ${langInfo.badge}">${langInfo.label}</span>
+                        </div>
+                        <div class="serif-title font-bold text-sm text-navy-900 truncate" title="${escapeHtml(book.title)}">
+                          ${escapeHtml(book.title)}
+                        </div>
+                        <div class="font-mono text-[11px] text-slate-400 truncate mt-1">
+                          #${book.seq || ''} ${escapeHtml(book.rawFilename)}
+                        </div>
+                      </div>
+                      <span class="text-xs text-navy-800 font-bold shrink-0 self-center">🔍 圖卡</span>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </section>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // ============================================================================
+    // 8. INTERACTIVE HANDLERS
+    // ============================================================================
+    function setCategoryFilter(catId) {
+      activeCategory = catId;
+      renderAll();
+    }
+
+    function setLangFilter(langId) {
+      activeLang = langId;
+      renderAll();
+    }
+
+    function setAuthorInitial(initial) {
+      activeAuthorInitial = initial;
+      renderAll();
+    }
+
+    function setVariantMode(mode) {
+      variantMode = mode;
+      renderAll();
+    }
+
+    function handleSearchInput(val) {
+      searchQuery = val;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) {
+        clearBtn.classList.toggle('hidden', !val.trim());
+      }
+      renderAll();
+    }
+
+    function clearSearch() {
+      searchQuery = '';
+      const input = document.getElementById('searchInput');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      renderAll();
+    }
+
+    function resetAllFilters() {
+      activeCategory = 'all';
+      activeLang = 'all';
+      activeAuthorInitial = 'all';
+      variantMode = 'all';
+      clearSearch();
+      renderAll();
+      showToast('已重設所有篩選條件，顯示全部 193 筆產品圖');
+    }
+
+    function handleSortChange(val) {
+      sortBy = val;
+      renderCatalog();
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      const modes = ['grid', 'table', 'grouped'];
+      modes.forEach(m => {
+        const btn = document.getElementById('viewBtn' + m.charAt(0).toUpperCase() + m.slice(1));
+        if (!btn) return;
+        if (m === mode) {
+          btn.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 bg-navy-900 text-white shadow-sm';
+        } else {
+          btn.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1 text-slate-600 hover:text-navy-900';
+        }
+      });
+      renderCatalog();
+    }
+
+    function quickChangeCategory(bookId, newCatId) {
+      const book = books.find(b => b.id === bookId);
+      if (!book) return;
+      book.category = newCatId;
+      persistOverrides();
+      renderAll();
+      const cat = CATEGORIES.find(c => c.id === newCatId);
+      showToast(`已將《${book.title}》移至「${cat ? cat.name : newCatId}」`);
+    }
+
+    // ============================================================================
+    // 9. LIGHTBOX VIEWER & INLINE EDITING
+    // ============================================================================
+    function openLightbox(bookId) {
+      const book = books.find(b => b.id === bookId);
+      if (!book) return;
+      currentLightboxBookId = bookId;
+      currentZoom = 1;
+      updateLightboxView();
+      document.getElementById('lightboxModal').classList.remove('hidden');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightboxModal').classList.add('hidden');
+      currentLightboxBookId = null;
+    }
+
+    function updateLightboxView() {
+      const filtered = getFilteredBooks();
+      const idx = filtered.findIndex(b => b.id === currentLightboxBookId);
+      const book = books.find(b => b.id === currentLightboxBookId);
+      if (!book) return;
+
+      document.getElementById('lightboxIndexBadge').textContent =
+        idx >= 0 ? `${idx + 1} / ${filtered.length}` : `1 / 1`;
+      document.getElementById('lightboxFilenameLabel').textContent = book.rawFilename;
+      document.getElementById('lightboxRawFilename').textContent = book.rawFilename;
+
+      const imgSrc = getBookImageSrc(book);
+      const graphicContainer = document.getElementById('lightboxGraphicContainer');
+      graphicContainer.style.transform = `scale(${currentZoom})`;
+      graphicContainer.innerHTML = `
+        <img
+          src="${imgSrc}"
+          alt="${escapeHtml(book.title)}"
+          onerror="this.onerror=null; this.src=generateBookInfoGraphicSvgDataUriById('${book.id}');"
+          class="max-h-[75vh] max-w-full rounded-lg shadow-2xl object-contain bg-white"
+        />
+      `;
+      document.getElementById('zoomLevelText').textContent = `${Math.round(currentZoom * 100)}%`;
+
+      const catSelect = document.getElementById('editCategorySelect');
+      catSelect.innerHTML = CATEGORIES.map(c =>
+        `<option value="${c.id}" ${c.id === book.category ? 'selected' : ''}>${c.icon} ${c.name}</option>`
+      ).join('');
+
+      document.getElementById('editLangSelect').value = book.lang;
+      document.getElementById('editAuthorInput').value = book.author;
+      document.getElementById('editEditionInput').value = book.edition;
+      document.getElementById('editTitleInput').value = book.title;
+      document.getElementById('editTagsInput').value = (book.tags || []).join(', ');
+    }
+
+    function adjustZoom(delta) {
+      currentZoom = Math.min(3, Math.max(0.5, +(currentZoom + delta).toFixed(2)));
+      const graphicContainer = document.getElementById('lightboxGraphicContainer');
+      if (graphicContainer) {
+        graphicContainer.style.transform = `scale(${currentZoom})`;
+      }
+      document.getElementById('zoomLevelText').textContent = `${Math.round(currentZoom * 100)}%`;
+    }
+
+    function resetZoom() {
+      currentZoom = 1;
+      adjustZoom(0);
+    }
+
+    function navigateLightbox(direction) {
+      const filtered = getFilteredBooks();
+      if (filtered.length === 0) return;
+      const idx = filtered.findIndex(b => b.id === currentLightboxBookId);
+      const nextIdx = (idx + direction + filtered.length) % filtered.length;
+      currentLightboxBookId = filtered[nextIdx].id;
+      currentZoom = 1;
+      updateLightboxView();
+    }
+
+    function saveCurrentBookEdits() {
+      if (!currentLightboxBookId) return;
+      const book = books.find(b => b.id === currentLightboxBookId);
+      if (!book) return;
+
+      book.category = document.getElementById('editCategorySelect').value;
+      book.lang = document.getElementById('editLangSelect').value;
+      book.author = document.getElementById('editAuthorInput').value.trim() || '未標示';
+      book.edition = document.getElementById('editEditionInput').value.trim() || '通用版';
+      book.title = document.getElementById('editTitleInput').value.trim() || book.rawFilename;
+      const tagsRaw = document.getElementById('editTagsInput').value;
+      book.tags = tagsRaw.split(/[,，]/).map(s => s.trim()).filter(Boolean);
+
+      if (!book.imageUrl) {
+        const graphicContainer = document.getElementById('lightboxGraphicContainer');
+        const imgEl = graphicContainer.querySelector('img');
+        if (imgEl) {
+          imgEl.src = getBookImageSrc(book);
+        }
+      }
+
+      persistOverrides();
+      renderAll();
+    }
+
+    function persistOverrides() {
+      try {
+        const map = {};
+        books.forEach(b => {
+          map[b.rawFilename] = {
+            category: b.category,
+            lang: b.lang,
+            author: b.author,
+            title: b.title,
+            edition: b.edition,
+            tags: b.tags
+          };
+        });
+        localStorage.setItem('textbook_catalog_overrides_v2', JSON.stringify(map));
+      } catch (e) {}
+    }
+
+    function copyBookCitation() {
+      const book = books.find(b => b.id === currentLightboxBookId);
+      if (!book) return;
+      const cat = CATEGORIES.find(c => c.id === book.category);
+      const langInfo = LANG_LABELS[book.lang] || LANG_LABELS.zh;
+      const text = `【${cat ? cat.name : '教材'}】${book.author}《${book.title}》(${book.edition}・${langInfo.label})｜對應圖檔：${book.rawFilename}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('已複製書目推薦資訊至剪貼簿！');
+        }).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('已複製書目推薦資訊至剪貼簿！');
+      } catch (e) {
+        showToast('複製失敗，請手動選取複製');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // ============================================================================
+    // 10. FILE / FOLDER IMPORT (MATCHES TO 193 PRE-BUILT BOOKS OR ADDS NEW)
+    // ============================================================================
+    function handleFileSelect(event) {
+      const fileList = event.target.files;
+      if (!fileList || fileList.length === 0) return;
+      processImportedFiles(fileList);
+    }
+
+    function processImportedFiles(fileList) {
+      const imageFiles = Array.from(fileList).filter(file => {
+        if (file.name.startsWith('.')) return false;
+        return /\.(jpg|jpeg|png|webp|gif|svg|bmp)$/i.test(file.name) || file.type.startsWith('image/');
+      });
+
+      if (imageFiles.length === 0) {
+        showToast('所選資料夾或檔案中未偵測到圖片檔 (.png, .jpg 等)');
+        return;
+      }
+
+      books.forEach(b => {
+        if (b.imageUrl && b.imageUrl.startsWith('blob:')) {
+          URL.revokeObjectURL(b.imageUrl);
+        }
+      });
+
+      // Map existing pre-classified 193 books by rawFilename so curated metadata is preserved!
+      const existingByFilename = new Map();
+      books.forEach(b => existingByFilename.set(b.rawFilename, b));
+
+      let matchedExisting = 0;
+      const newBooks = [];
+
+      imageFiles.forEach((file, idx) => {
+        const cleanName = file.name.trim().replace(/^.*[\\/]/, '');
+        const existing = existingByFilename.get(cleanName);
+        if (existing) {
+          existing.imageUrl = URL.createObjectURL(file);
+          matchedExisting++;
+        } else {
+          const parsed = parseTextbookFilename(cleanName);
+          newBooks.push({
+            id: 'local_' + idx,
+            ...parsed,
+            imageUrl: URL.createObjectURL(file),
+            seq: books.length + newBooks.length + 1
+          });
+        }
+      });
+
+      if (matchedExisting === 0 && newBooks.length > 0) {
+        // User selected a completely different set of images
+        books = newBooks.map((b, i) => ({ ...b, seq: i + 1 }));
+      } else if (newBooks.length > 0) {
+        books = [...books, ...newBooks];
+      }
+
+      hasLocalBlobFiles = true;
+      updateDatasetBadge();
+      renderAll();
+      showToast(`🎉 成功載入 ${imageFiles.length} 張產品資訊圖原圖！`);
+    }
+
+    function setupDragAndDrop() {
+      const body = document.getElementById('appBody');
+      window.addEventListener('dragover', e => {
+        e.preventDefault();
+        body.classList.add('drop-active');
+      });
+      window.addEventListener('dragleave', e => {
+        if (e.relatedTarget === null) {
+          body.classList.remove('drop-active');
+        }
+      });
+      window.addEventListener('drop', e => {
+        e.preventDefault();
+        body.classList.remove('drop-active');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+          processImportedFiles(e.dataTransfer.files);
+        }
+      });
+    }
+
+    function openBatchListModal() {
+      document.getElementById('batchListModal').classList.remove('hidden');
+    }
+
+    function closeBatchListModal() {
+      document.getElementById('batchListModal').classList.add('hidden');
+    }
+
+    function fillSampleFilenameList() {
+      document.getElementById('batchFilenamesTextarea').value = INITIAL_CATALOG_193.map(d => d.file).join('\n');
+    }
+
+    function importFromFilenameList() {
+      const rawText = document.getElementById('batchFilenamesTextarea').value;
+      const prefix = (document.getElementById('imageFolderPrefixInput').value || './').trim();
+      const defaultExt = document.getElementById('defaultExtInput').value || '.png';
+
+      const lines = rawText.split(/\r?\n/).map(s => s.trim()).filter(l => l && l !== 'eric.bat' && l !== 'list.txt');
+      if (lines.length === 0) {
+        showToast('請先貼上至少一筆檔名');
+        return;
+      }
+
+      const normalizedPrefix = prefix.endsWith('/') ? prefix : prefix + '/';
+
+      books = lines.map((line, idx) => {
+        const hasExt = /\.(jpg|jpeg|png|webp|gif|svg|bmp)$/i.test(line);
+        const filename = hasExt ? line : line + defaultExt;
+        const parsed = parseTextbookFilename(filename);
+        return {
+          id: 'list_' + idx,
+          ...parsed,
+          imageUrl: normalizedPrefix + encodeURIComponent(parsed.rawFilename),
+          seq: idx + 1
+        };
+      });
+
+      closeBatchListModal();
+      resetAllFilters();
+      updateDatasetBadge();
+      showToast(`已依清單建立 ${books.length} 筆產品資訊圖索引！`);
+    }
+
+    function resetToDemoData() {
+      loadCatalogFrom193();
+      resetAllFilters();
+      showToast('已恢復為完整 193 筆產品資訊圖預設書庫');
+    }
+
+    // ============================================================================
+    // 11. PARSER TESTBENCH MODAL
+    // ============================================================================
+    function openParserTestModal() {
+      document.getElementById('parserTestModal').classList.remove('hidden');
+      updateLiveParserPreview(document.getElementById('liveParserInput').value);
+    }
+
+    function closeParserTestModal() {
+      document.getElementById('parserTestModal').classList.add('hidden');
+    }
+
+    function updateLiveParserPreview(val) {
+      const parsed = parseTextbookFilename(val || '');
+      const cat = CATEGORIES.find(c => c.id === parsed.category) || CATEGORIES[2];
+      const langInfo = LANG_LABELS[parsed.lang] || LANG_LABELS.zh;
+      const container = document.getElementById('liveParserResult');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="p-2.5 rounded-lg bg-white border border-slate-200">
+          <div class="text-[10px] text-slate-400 font-bold">作者 (Author)</div>
+          <div class="font-bold text-navy-900 mt-0.5 truncate">${escapeHtml(parsed.author)}</div>
+        </div>
+        <div class="p-2.5 rounded-lg bg-white border border-slate-200 sm:col-span-2">
+          <div class="text-[10px] text-slate-400 font-bold">書名 (Book Title)</div>
+          <div class="font-bold text-navy-900 mt-0.5 truncate">${escapeHtml(parsed.title)}</div>
+        </div>
+        <div class="p-2.5 rounded-lg bg-white border border-slate-200">
+          <div class="text-[10px] text-slate-400 font-bold">版次 (Edition)</div>
+          <div class="font-mono font-bold text-crimson-600 mt-0.5">${escapeHtml(parsed.edition)}</div>
+        </div>
+        <div class="p-2.5 rounded-lg bg-white border border-slate-200">
+          <div class="text-[10px] text-slate-400 font-bold">自動分類 & 語系</div>
+          <div class="font-bold text-navy-900 mt-0.5 truncate">${cat.icon} ${cat.name} (${langInfo.label})</div>
+        </div>
+      `;
+    }
+
+    // ============================================================================
+    // 12. EXPORT TOOLS (STANDALONE HTML, CSV, JSON)
+    // ============================================================================
+    function toggleExportMenu() {
+      const menu = document.getElementById('exportMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    window.addEventListener('click', e => {
+      const wrapper = document.getElementById('exportDropdownWrapper');
+      const menu = document.getElementById('exportMenu');
+      if (wrapper && menu && !wrapper.contains(e.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+
+    function exportCsvCatalog() {
+      document.getElementById('exportMenu').classList.add('hidden');
+      const headers = ['序號', '學科分類', '教材語系', '作者', '書名', '原文參考資訊', '版次', '標籤', '是否重複或勘誤', '原始檔名'];
+      const rows = books.map((b, i) => {
+        const cat = CATEGORIES.find(c => c.id === b.category);
+        const langInfo = LANG_LABELS[b.lang] || LANG_LABELS.zh;
+        return [
+          b.seq || i + 1,
+          cat ? cat.name : b.category,
+          langInfo.label,
+          b.author,
+          b.title,
+          b.origInfo || '',
+          b.edition,
+          (b.tags || []).join('; '),
+          b.isVariant ? '是 (重複/勘誤)' : '否',
+          b.rawFilename
+        ].map(cell => `"${String(cell || '').replace(/"/g, '""')}"`).join(',');
+      });
+
+      const csvContent = '\uFEFF' + [headers.join(','), ...rows].join('\r\n');
+      downloadBlob(new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }), '193張教科書產品資訊圖分類索引表.csv');
+      showToast('已匯出 193 筆 Excel / CSV 完整分類書單！');
+    }
+
+    function exportJsonConfig() {
+      document.getElementById('exportMenu').classList.add('hidden');
+      const exportData = books.map(b => ({
+        rawFilename: b.rawFilename,
+        author: b.author,
+        title: b.title,
+        origInfo: b.origInfo || '',
+        edition: b.edition,
+        lang: b.lang,
+        category: b.category,
+        tags: b.tags || [],
+        isVariant: Boolean(b.isVariant)
+      }));
+      const jsonBlob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json;charset=utf-8;' });
+      downloadBlob(jsonBlob, 'bookinfo_193_catalog.json');
+      showToast('已下載 JSON 分類設定檔！');
+    }
+
+    function exportStandaloneHtml() {
+      document.getElementById('exportMenu').classList.add('hidden');
+      const serializedBooks = books.map(b => ({
+        file: b.rawFilename,
+        author: b.author,
+        title: b.title,
+        origInfo: b.origInfo || '',
+        edition: b.edition,
+        lang: b.lang,
+        category: b.category,
+        tags: b.tags || [],
+        isVariant: Boolean(b.isVariant)
+      }));
+
+      let htmlSource = document.documentElement.outerHTML;
+      const injectionScript = `window.__PRECONFIGURED_BOOKS__ = ${JSON.stringify(serializedBooks)};`;
+      htmlSource = htmlSource.replace('<script>', '<script>' + injectionScript);
+      const blob = new Blob(['<!DOCTYPE html>\n' + htmlSource], { type: 'text/html;charset=utf-8;' });
+      downloadBlob(blob, 'index.html');
+      showToast('已下載 index.html！請將它放入包含 193 張 .png 的資料夾中直接開啟。');
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    // ============================================================================
+    // 13. KEYBOARD SHORTCUTS & TOAST
+    // ============================================================================
+    function setupKeyboardShortcuts() {
+      window.addEventListener('keydown', e => {
+        const lightboxOpen = !document.getElementById('lightboxModal').classList.contains('hidden');
+        if (lightboxOpen) {
+          if (e.key === 'Escape') {
+            closeLightbox();
+          } else if (e.key === 'ArrowLeft' && document.activeElement.tagName !== 'INPUT') {
+            navigateLightbox(-1);
+          } else if (e.key === 'ArrowRight' && document.activeElement.tagName !== 'INPUT') {
+            navigateLightbox(1);
+          }
+        }
+      });
+    }
+
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'px-4 py-2.5 rounded-xl bg-navy-900 text-white text-xs font-semibold shadow-xl border border-white/15 flex items-center gap-2 animate-fade-in';
+      toast.innerHTML = `<span class="text-amber-400">●</span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => toast.remove(), 260);
+      }, 2800);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.__PRECONFIGURED_BOOKS__ && Array.isArray(window.__PRECONFIGURED_BOOKS__)) {
+        books = window.__PRECONFIGURED_BOOKS__.map((item, idx) => ({
+          id: 'pre_' + idx,
+          rawFilename: item.file,
+          author: item.author,
+          title: item.title,
+          origInfo: item.origInfo || '',
+          edition: item.edition,
+          lang: item.lang,
+          category: item.category,
+          tags: item.tags || [],
+          isVariant: Boolean(item.isVariant),
+          imageUrl: './' + encodeURIComponent(item.file),
+          seq: idx + 1
+        }));
+        updateDatasetBadge();
+        renderAll();
+        setupDragAndDrop();
+        setupKeyboardShortcuts();
+      } else {
+        initApp();
+      }
+    });
+  </script>
+</body>
+</html>
